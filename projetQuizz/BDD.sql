@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS UTILISATEUR
  ) 
  comment = "";
 
-INSERT INTO UTILISATEUR VALUES ('ADMIN', 'ADMIN', 1, 0);
+INSERT INTO UTILISATEUR VALUES ('ADMIN', 'ADMIN', 0, 0);
 
 
 # -----------------------------------------------------------------------------
@@ -29,66 +29,72 @@ CREATE TABLE IF NOT EXISTS THEME
  ) 
  comment = "";
 
-INSERT INTO CLIENT VALUES ('Harry Potter', , "Questions sur le monde d'Harry Potter", , );
+INSERT INTO THEME(NOM_THEME, DESC_THEME) VALUES ('Harry Potter',"Questions sur le monde d'Harry Potter");
 
 
 # -----------------------------------------------------------------------------
-#       TABLE : 
+#       TABLE : QUESTION
 # -----------------------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS PREFERENCE
+CREATE TABLE IF NOT EXISTS QUESTION
  (
-   CLI_NUM INTEGER(2) NOT NULL  ,
-   PAYS_CODE VARCHAR(2) NOT NULL  ,
-   EST_CODE VARCHAR(2) NOT NULL  
-   , PRIMARY KEY (CLI_NUM,PAYS_CODE,EST_CODE) 
+   ID_QUEST INTEGER NOT NULL  ,
+   INTITULE VARCHAR(500) NOT NULL  ,
+   TYPE_QUEST VARCHAR(50) NOT NULL ,
+   MEDIA VARCHAR(250) NULL, 
+   NOM_THEME VARCHAR(50) NOT NULL
+   , PRIMARY KEY (ID_QUEST) 
  ) 
  comment = "";
 
-INSERT INTO PREFERENCE VALUES (1, 'B', 'DE');
-INSERT INTO PREFERENCE VALUES (2, 'B', 'AB');
-INSERT INTO PREFERENCE VALUES (3, 'SP', 'EXC');
-INSERT INTO PREFERENCE VALUES (2, 'F', 'AB');
-INSERT INTO PREFERENCE VALUES (5, 'D', 'S');
-INSERT INTO PREFERENCE VALUES (2, 'CH', 'EXC');
+INSERT INTO QUESTION(ID_QUEST,INTITULE,TYPE_QUEST,NOM_THEME) VALUES (1, 'Quel est le nom du personnage principal', 'TEXT','Harry Potter');
+
 
 
 # -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE PREFERENCE
+#       INDEX DE LA TABLE QUESTION
 # -----------------------------------------------------------------------------
 
 
-CREATE  INDEX I_FK_PREFERENCE_CLIENT
-     ON PREFERENCE (CLI_NUM ASC);
+CREATE  INDEX I_FK_QUESTION_THEME
+     ON QUESTION ( NOM_THEME ASC);
 
-CREATE  INDEX I_FK_PREFERENCE_PAYS
-     ON PREFERENCE (PAYS_CODE ASC);
+# -----------------------------------------------------------------------------
+#       TABLE : REPONSE
+# -----------------------------------------------------------------------------
 
-CREATE  INDEX I_FK_PREFERENCE_ESTIMATION
-     ON PREFERENCE (EST_CODE ASC);
+CREATE TABLE IF NOT EXISTS REPONSE
+ (
+   ID_REPONSE INTEGER NOT NULL  ,
+   INTITULE VARCHAR(500) NOT NULL  ,
+   IS_TRUE TINYINT NOT NULL ,
+   ID_QUEST INTEGER NOT NULL  ,
+   PRIMARY KEY (ID_REPONSE) 
+ ) 
+ comment = "";
 
+INSERT INTO REPONSE VALUES (1, 'Harry Potter', 0, 1);
+
+
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE REPONSE
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_REPONSE_QUESTION
+     ON REPONSE ( ID_QUEST ASC);
 
 # -----------------------------------------------------------------------------
 #       CREATION DES REFERENCES DE TABLE
 # -----------------------------------------------------------------------------
 
 
-ALTER TABLE CLIENT 
-  ADD FOREIGN KEY FK_CLIENT_PAYS (PAYS_CODE)
-      REFERENCES PAYS (PAYS_CODE) ;
+ALTER TABLE QUESTION 
+  ADD FOREIGN KEY FK_QUESTION_THEME (NOM_THEME)
+      REFERENCES THEME (NOM_THEME) ;
 
 
-ALTER TABLE PREFERENCE 
-  ADD FOREIGN KEY FK_PREFERENCE_CLIENT (CLI_NUM)
-      REFERENCES CLIENT (CLI_NUM) ;
-
-
-ALTER TABLE PREFERENCE 
-  ADD FOREIGN KEY FK_PREFERENCE_PAYS (PAYS_CODE)
-      REFERENCES PAYS (PAYS_CODE) ;
-
-
-ALTER TABLE PREFERENCE 
-  ADD FOREIGN KEY FK_PREFERENCE_ESTIMATION (EST_CODE)
-      REFERENCES ESTIMATION (EST_CODE) ;
-
+ALTER TABLE REPONSE
+  ADD FOREIGN KEY FK_REPONSE_QUESTION (ID_QUEST)
+      REFERENCES QUESTION (ID_QUEST) ;
