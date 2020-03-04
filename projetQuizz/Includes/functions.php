@@ -3,17 +3,17 @@
 // Connect to the database. Returns a PDO object
 function getDb() {
     // Local deployment
-    /* $server = "localhost";
-    $username = "mymovies_user";
-    $password = "secret";
-    $db = "mymovies"; */
+    $server = "localhost";
+    $username = "test";
+    $password = "test";
+    $db = "id12746608_quizzensc"; 
     
     // Deployment on Heroku with ClearDB for MySQL
-    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    /*$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
     $server = $url["host"];
     $username = $url["user"];
     $password = $url["pass"];
-    $db = substr($url["path"], 1);
+    $db = substr($url["path"], 1);*/
     
     return new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password",
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -33,3 +33,25 @@ function redirect($url) {
 function escape($value) {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
 }
+
+function formUser($type)
+{?>
+    <form method ="POST">
+		
+		<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
+		<br/>
+		<div class="row align-items-center">
+			<div class="m-auto">
+				<label for ="login"> Login : </label>
+				<input type="text" name="login" size ="17"/> <br/>
+			</div>
+			<div class="m-auto">
+				<label for ="mdp"> Mot de passe : </label>
+				<input type="password" name="mdp" size="17"/>
+			</div>
+		</div>
+		
+		
+		<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+    </form>
+<?php }

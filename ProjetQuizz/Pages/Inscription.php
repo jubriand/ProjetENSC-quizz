@@ -21,8 +21,7 @@ if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
 
 <html lang="fr">
 	<body>
-		
-		<?php formUser('Connexion'); ?> 
+		<?php formUser('Inscription'); ?> 
 		
 		
         <?php require_once "../Includes/scripts.php"; ?> 

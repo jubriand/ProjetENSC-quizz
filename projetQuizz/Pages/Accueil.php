@@ -1,5 +1,5 @@
+<?php require_once "../Includes/head.php"; ?> 
 <html lang="fr">
-    <?php require_once "../Includes/head.php"; ?> 
 	<body>
 		<h1> Bienvenue sur le projet quizz ENSC </h1> <br/>
 		<button type="button"> Se connecter </button> <br/><br/>

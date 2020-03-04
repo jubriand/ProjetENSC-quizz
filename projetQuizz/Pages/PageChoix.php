@@ -1,7 +1,7 @@
-<html lang="fr">
-    <?php require_once "../Includes/head.php"; ?> 
-    <?php require_once "../Includes/header.php"; ?> 
+<?php require_once "../Includes/head.php"; ?> 
+<?php require_once "../Includes/header.php"; ?> 
 	
+<html lang="fr">
 	<body>
 		
 		<h1 class="text-center"> Themes </h1> <br/>
