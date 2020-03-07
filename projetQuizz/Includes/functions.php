@@ -49,6 +49,12 @@ function formUser($type)
 				<label for ="mdp"> Mot de passe : </label>
 				<input type="password" name="mdp" size="17"/>
 			</div>
+            <?php if($type=='Inscription'){?>
+                <div class="m-auto">
+				<label for ="mdp"> Cochez cette case pour être administrateur: </label>
+				<input type="radio" name="admin"/>
+			    </div>
+            <?php } ?>
 		</div>
 		
 		

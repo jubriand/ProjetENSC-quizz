@@ -2,8 +2,8 @@
 <html lang="fr">
 	<body>
 		<h1> Bienvenue sur le projet quizz ENSC </h1> <br/>
-		<button type="button"> Se connecter </button> <br/><br/>
-		<button type="button"> S'inscrire </button> <br/>
+		<a href="Connexion.php" class="btn btn-primary btn-lg"> Se connecter </a> <br/><br/>
+		<a  href="Inscription.php" class="btn btn-primary btn-lg"> S'inscrire </a> <br/>
 		
 		
 		
