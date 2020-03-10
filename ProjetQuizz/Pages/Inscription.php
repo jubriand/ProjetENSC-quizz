@@ -5,20 +5,20 @@ session_start();
 
 if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
     $login = $_POST['login'];
-    $password = $_POST['mdp'];
+    $mdp = $_POST['mdp'];
     $is_admin=$_POST['admin'];
     if ($is_admin=='on')
     {
-        $is_admin=1;
+        $is_admin=0;
     }
     else
     {
-        $is_admin=0;
+        $is_admin=1;
     }
 
-    $stmt = getDb()->prepare("insert into utilisateur(PSEUDO, MDP, IS_ADMIN) values($login, $password, $is_admin)");
+    $stmt = getDb()->prepare("insert into utilisateur(PSEUDO, MDP, IS_ADMIN) values('$login', '$mdp', $is_admin)");
     $stmt->execute();
-    redirect("PageChoix.php");
+    //redirect("PageChoix.php");
 }
 ?>
 

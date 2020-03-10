@@ -5,9 +5,9 @@ session_start();
 
 if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
     $login = $_POST['login'];
-	$password = $_POST['mdp'];
+	$mdp = $_POST['mdp'];
     $stmt = getDb()->prepare('select * from utilisateur where PSEUDO=? and MDP=?');
-    $stmt->execute(array($login, $password));
+    $stmt->execute(array($login, $mdp));
     if ($stmt->rowCount() == 1) {
         // Authentication successful
         $_SESSION['login'] = $login;
