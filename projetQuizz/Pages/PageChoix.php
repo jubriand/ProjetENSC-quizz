@@ -2,7 +2,7 @@
 require_once "../Includes/functions.php";
 session_start();
 require_once "../Includes/head.php"; 
-require_once "../Includes/header.php";
+
 
 
 // Recuperer tous les themes
@@ -11,6 +11,7 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 
 <html>
 	<body>
+		<?php require_once "../Includes/header.php" ;?>
 		<div class="container">
 			<h1 class="text-center"> Themes </h1> <br/>
 				<?php 
