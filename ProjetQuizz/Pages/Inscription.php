@@ -18,7 +18,7 @@ if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
 
     $stmt = getDb()->prepare("insert into utilisateur(PSEUDO, MDP, IS_ADMIN) values('$login', '$mdp', $is_admin)");
     $stmt->execute();
-    //redirect("PageChoix.php");
+    redirect("PageChoix.php");
 }
 ?>
 
