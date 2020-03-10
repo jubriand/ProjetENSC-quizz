@@ -1,31 +1,9 @@
-
-<!--<html lang="fr">
-	<body>
-		
-		<h1 class="text-center"> Themes </h1> <br/>
-		<div class="row">
-		  <div class="col"> <p class="text-center"> <button type="button"> Theme 1 </button> </p> </div>
-		  <div class="col"> <p class="text-center"> <button type="button"> Theme 2 </button> </p> </div>
-		  <div class="col"> <p class="text-center"> <button type="button"> Theme 3 </button> </p> </div>		  
-		</div>
-		<br/>
-		<div class="row">
-		  <div class="col"> <p class="text-center"> <button type="button"> Theme 1 </button> </p> </div>
-		  <div class="col"> <p class="text-center"> <button type="button"> Theme 2 </button> </p> </div>
-		  <div class="col"> <p class="text-center"> <button type="button"> Theme 3 </button> </p> </div>		  
-		</div>
-		
-		
-		
-		
-	</body>
-</html>-->
-
 <?php
 require_once "../Includes/functions.php";
+session_start();
 require_once "../Includes/head.php"; 
 require_once "../Includes/header.php";
-session_start();
+
 
 // Recuperer tous les themes
 $themes = getDb()->query('select * from theme order by ID_THEME'); 

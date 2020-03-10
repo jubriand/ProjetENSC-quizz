@@ -24,6 +24,13 @@ function isUserConnected() {
     return isset($_SESSION['login']);
 }
 
+function isAdmin(){
+    $stmt = getDb()->prepare('select * from utilisateur where PSEUDO=?');
+    $stmt->execute(array($_SESSION['login']));
+    $is_admin = $stmt->fetch();
+    return $is_admin['IS_ADMIN'];
+}
+
 // Redirect to a URL
 function redirect($url) {
     header("Location: $url");

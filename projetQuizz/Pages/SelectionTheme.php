@@ -1,8 +1,10 @@
 <?php
-require_once "../Includes/head.php";
-require_once "../Includes/header.php";
 require_once "../Includes/functions.php";
+require_once "../Includes/head.php";
 session_start();
+require_once "../Includes/header.php";
+
+
 
 $ID_THEME = $_GET['id'];
 $stmt = getDb()->prepare('select * from theme where ID_THEME=?');
