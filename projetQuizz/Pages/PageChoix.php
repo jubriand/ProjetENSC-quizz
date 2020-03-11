@@ -11,9 +11,9 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 
 <html>
 	<body>
-		<?php require_once "../Includes/header.php" ;?>
-		<div class="container">
-			<h1 class="text-center"> Themes </h1> <br/>
+	<?php require_once "../Includes/header.php" ;?>
+		<div class="container-fluid"><br/>
+			<h1 class="text-center"> Themes </h1> <br/><br/>
 				<?php 
 					$i=0;
 					foreach ($themes as $theme) 
@@ -33,7 +33,7 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 
 					}	?>
 				</div>
-			
+			<br/>
 		</div>
 		<?php require_once "../Includes/footer.php"; ?> 
 		<?php require_once "../Includes/scripts.php"; ?> 
