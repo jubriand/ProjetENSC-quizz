@@ -7,7 +7,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  	<?php if (isUserConnected()){?>
+    <?php if (isUserConnected()){?>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="Profil.php">Profil <span class="sr-only">(current)</span></a>
@@ -17,8 +17,20 @@
         <a class="nav-link" href="Admin.php">Administrateur</a>
       </li>
       <?php } ?>
-	</ul>
-	<?php } ?> 
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="navbar-right">
+        <a class="btn btn-danger navbar-btn" type="button" href="Deconnexion.php">Deconnexion</a> 
+      </li>
+    </ul>
+    <?php } 
+    else {?>
+    <ul class="navbar-nav ml-auto">
+      <a class="btn btn-danger navbar-btn" type="button" href="Connexion.php">Connexion</a> 
+      <a class="btn btn-outline-success" type="button" href="Inscription.php">Inscription</a>
+    <?php } ?>
+	  </ul>
+
   </div>
 </nav>
 
