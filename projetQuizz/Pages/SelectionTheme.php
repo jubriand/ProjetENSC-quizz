@@ -2,9 +2,6 @@
 require_once "../Includes/functions.php";
 require_once "../Includes/head.php";
 session_start();
-require_once "../Includes/header.php";
-
-
 
 $ID_THEME = $_GET['id'];
 $stmt = getDb()->prepare('select * from theme where ID_THEME=?');
@@ -15,8 +12,9 @@ $theme = $stmt->fetch(); // Access first (and only) result line
 
 <html>
     <body>
+        <?php require_once "../Includes/header.php"; ?>
         <div class="container">
-            <div class="jumbotron">
+            <br/><div class="jumbotron">
                 <div class="row">
                     <?php if( $theme['PHOTOS']!=NULL)
                     {?>
@@ -30,7 +28,15 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                         <p>Temps imparti: <?= $theme['TIMER']/60 ?> minutes et <?= $theme['TIMER']%60 ?> secondes </p>
                         <p><small><?= $theme['DESC_THEME'] ?></small></p>
                         <h4 class= "text-center">Meilleur score: <?= $theme['BEST_SCORE'] ?></h4>
-                        <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>" class="btn btn-primary btn-lg"> JOUER </a> </p>
+
+                        <br/>
+                        <br/>
+                        <h5 class= "text-center">Choix de la difficulté:</h5>
+                        <div class='row'>
+                            <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>?diff=1" class="btn btn-primary btn-lg"> Facile</a> </p> </div>
+                            <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>?diff=2" class="btn btn-warning btn-lg"> Moyen </a> </p> </div>
+                            <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>?diff=3" class="btn btn-danger btn-lg"> Difficile </a> </p> </div>
+                        </div>
                     </div>
                    
                     
