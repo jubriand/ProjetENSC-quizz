@@ -8,13 +8,6 @@ function getDb() {
     $password = "test";
     $db = "id12746608_quizzensc"; 
     
-    // Deployment on Heroku with ClearDB for MySQL
-    /*$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $server = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $db = substr($url["path"], 1);*/
-    
     return new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password",
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
