@@ -72,7 +72,7 @@ function TypeQuestion($id)
 	return $type;
 }	
 
-function QuestionVraiFaux($ID_THEME)
+function QuestionVraiFaux($ID_THEME) //question vrai ou faux (TYPE_QUEST=0)
 {	
 	//if (TypeQuestion()==0)
 		
@@ -84,12 +84,9 @@ function QuestionVraiFaux($ID_THEME)
 			<form method ="POST">
 				<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
 				<br/>
-				<div class="row align-items-center">
+				<div align="center">
+					
 					<div class="m-auto">
-						<label for ="intitule"> $intitule </label>
-						<input type="text" name="intitule" size ="17"/> <br/>
-					</div>
-					<div class="m-auto"> <br/>
 						<label for ="reponse"> Vrai </label>
 						<input type="radio" name="reponse" value="1" size="17"/>
 						<label for ="reponse"> Faux </label>
@@ -99,13 +96,70 @@ function QuestionVraiFaux($ID_THEME)
 				
 				
 				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
-			</form>
-
-			
-			
-		
+			</form>	
 		<?php
-	
 }
-?>
+
+function QuestionOuverte($ID_THEME) //question ouverte (TYPE_QUEST=1)
+{	
+	//if (TypeQuestion()==0)
+		
+			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
+			$stmt->execute(array($typeQuestion));
+			$intitule = $stmt->fetch(); // Access first (and only) result line
+		?>
+
+			<form method ="POST">
+				<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
+				<br/>
+				<div align="center">
+					<div class="m-auto">
+						
+						<input type="text" name="intitule" size ="17"/> <br/>
+					</div>
+					
+				</div>
+				
+				
+				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+			</form>	
+		<?php
+}
+
+function QuestionCM($ID_THEME) //question choix multiple (TYPE_QUEST=2)
+{	
+	//if (TypeQuestion()==0)
+		
+			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
+			$stmt->execute(array($typeQuestion));
+			$intitule = $stmt->fetch(); // Access first (and only) result line
+		?>
+
+			<form method ="POST">
+				<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
+				<br/>
+				<div align="center">
+					
+					<div class="m-auto">
+						<label for="rep1"> réponse 1</label><br>
+						<input type="checkbox" id="rep1" name="rep1" value="Bike" size="17"/>
+						
+						<label for="rep2"> réponse 2</label><br>
+						<input type="checkbox" id="rep2" name="rep2" value="Car" size="17"/>
+						
+						<label for="vehicle3"> réponse 3</label><br>
+						<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" size="17"/>
+
+						<label for="rep4"> réponse 4</label><br>
+						<input type="checkbox" id="rep4" name="rep4" value="Train" size="17"/>
+						
+						
+					</div>
+				</div>
+				
+				
+				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+			</form>	
+		<?php
+} ?>
 </html>
