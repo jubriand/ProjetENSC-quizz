@@ -34,6 +34,13 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 					}	?>
 				</div>
 			<br/>
+			<?php if($_SESSION['mode']=="admin")
+			{?>	
+				<div class="text-center">
+					<a class="btn btn-danger navbar-btn" type="button" href="AjoutTheme.php"> <h5>Ajouter un thème</h5></a>
+				</div>
+				<br/>
+			<?php } ?>
 		</div>
 		<?php require_once "../Includes/footer.php"; ?> 
 		<?php require_once "../Includes/scripts.php"; ?> 
