@@ -30,11 +30,6 @@ function redirect($url) {
     header("Location: $url");
 }
 
-// Escape a value to prevent XSS attacks
-function escape($value) {
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-}
-
 function formUser($type)
 {?>
     <form method ="POST">

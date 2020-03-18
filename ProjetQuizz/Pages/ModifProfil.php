@@ -48,7 +48,6 @@ else
                     {?>
                         <div class="alert alert-danger" role="alert">
                             <img src="../Icons/svg/warning.svg" alt="warning">
-                            <span class="sr-only">Error:</span>
                             La confirmation du <?= $affichage ?> ne correspond pas au nouveau <?= $affichage ?> rentré
                         </div>
                     <?php }
@@ -57,7 +56,6 @@ else
                 {?>
                     <div class="alert alert-danger" role="alert">
                         <img src="../Icons/svg/warning.svg" alt="warning">
-                        <span class="sr-only">Error:</span>
                         L'ancien <?= $affichage ?> renseigné n'est pas valide
                     </div>
                 <?php }
