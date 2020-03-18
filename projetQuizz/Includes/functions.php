@@ -72,21 +72,20 @@ function AfficherIntitule($ID_THEME)
 	$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
 	$stmt->execute(array($ID_THEME));
 	$intitule = $stmt->fetch(); // Access first (and only) result line
-	echo $intitule;
+	?>
+	<legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>; <?php
+	
 }
 
 function QuestionVraiFaux($ID_THEME) //question vrai ou faux (TYPE_QUEST=0)
 {	
-	//if (TypeQuestion()==0)
+	
 		    AfficherIntitule($ID_THEME);
 
-			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
-			$stmt->execute(array($ID_THEME));
-			$intitule = $stmt->fetch(); // Access first (and only) result line
 		?>
 
 			<form method ="POST">
-				<fieldset ><legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>
+				<fieldset ><legend class="text-center">  </legend>
 				<br/>
 				<div align="center">
 					
@@ -106,15 +105,13 @@ function QuestionVraiFaux($ID_THEME) //question vrai ou faux (TYPE_QUEST=0)
 
 function QuestionOuverte($ID_THEME) //question ouverte (TYPE_QUEST=1)
 {	
-	//if (TypeQuestion()==0)
+		AfficherIntitule($ID_THEME);
 		
-			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
-			$stmt->execute(array($ID_THEME));
-			$intitule = $stmt->fetch(); // Access first (and only) result line
+			
 		?>
 
 			<form method ="POST">
-				<fieldset ><legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>
+				<fieldset ><legend class="text-center"> </legend>
 				<br/>
 				<div align="center">
 					<div class="m-auto">
@@ -132,11 +129,9 @@ function QuestionOuverte($ID_THEME) //question ouverte (TYPE_QUEST=1)
 
 function QuestionCM($ID_THEME) //question choix multiple (TYPE_QUEST=2)
 {	
-	//if (TypeQuestion()==0)
+	
 		
-			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
-			$stmt->execute(array($ID_THEME));
-			$intitule = $stmt->fetch(); // Access first (and only) result line
+		AfficherIntitule($ID_THEME);
 		?>
 
 			<form method ="POST">
