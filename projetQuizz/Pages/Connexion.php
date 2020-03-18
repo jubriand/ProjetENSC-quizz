@@ -11,6 +11,7 @@ if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
     if ($stmt->rowCount() == 1) {
         // Authentication successful
         $_SESSION['login'] = $login;
+        $_SESSION['mode']="joueur";
         redirect("PageChoix.php");
     }
     else {

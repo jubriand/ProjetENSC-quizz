@@ -10,11 +10,20 @@
     <?php if (isUserConnected()){?>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="Profil.php">Profil <span class="sr-only">(current)</span></a>
+        <a class="btn btn-light" type="button" href="Profil.php">Profil <span class="sr-only">(current)</span></a>
       </li>
 	  <?php if (isAdmin()==0){ ?>
       <li class="nav-item">
-        <a class="nav-link" href="Admin.php">Administrateur</a>
+        <a class="btn btn-secondary" type="button" href="ChangementMode.php">
+        <?php if($_SESSION['mode']=="admin")
+        {
+          print "Mode administrateur";
+        }
+        elseif($_SESSION['mode']=="joueur")
+        {
+          print "Mode joueur";
+        }?>  
+        </a>        
       </li>
       <?php } ?>
     </ul>
