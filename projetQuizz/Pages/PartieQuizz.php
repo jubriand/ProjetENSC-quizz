@@ -10,28 +10,31 @@
 	$theme = $stmt->fetch(); // Access first (and only) result line
 
 	//on regarde le nombre max de question par theme 
-	$NBRE_MAX = $_GET['id'];
-	$stmt = getDb()->prepare('select COUNT(*) from question where ID_THEME=?');
-	$stmt->execute(array($NBRE_MAX));
-	$nbremax = $stmt->fetch();
+	$demande = getDb()->prepare('select COUNT(*) from question where ID_THEME=?');
+	$demande->execute(array($ID_THEME));
+    $nbremax = $demande->fetch();
+
 	//definir chiffre random 
-	$RANDINT=rand(1,$nbremax)
+	$RANDINT= rand( 1, (int)$nbremax) ;
 
 	//on regarde le type de la question choisie au hasard 
-	$TYPE_QUEST = $_GET['id'];
-	$stmt = getDb()->prepare('select TYPE_QUEST from question where ID_QUEST=$RANDINT');
-	$stmt->execute(array($TYPE_QUEST));
-	$question = $stmt->fetch(); // Access first (and only) result line
+	//$TYPE_QUEST = $_GET['id'];
+	//$stmt = getDb()->prepare('select TYPE_QUEST from question where ID_QUEST=$RANDINT');
+	//$stmt->execute(array($TYPE_QUEST));
+	//$question = $stmt->fetch(); // Access first (and only) result line
+	$demande1 = getDb()->prepare('select TYPE_QUEST from question where ID_QUEST=?');
+	$demande1->execute(array($RANDINT));
+    $question = $demande1->fetch();
     
-	if ($question==0)
+	if ((int)$question==0)
 	{
 		QuestionVraiFaux($ID_THEME);
 	}
-	elseif ($question==1) 
+	elseif ((int)$question==1) 
 	{
 		QuestionOuverte($ID_THEME);
     }
-	//elseif ($question==2) 
+	elseif ((int)$question==2) 
 	{
 		QuestionCM($ID_THEME);
     }

@@ -65,23 +65,32 @@ function formUser($type)
 function TypeQuestion($id)
 {
 
-	$stmt = getDb()->prepare('select TEST_QUEST from question where id=?');
-	$stmt->execute(array($typeQuestion));
+	$stmt = getDb()->prepare('select TYPE_QUEST from question where id=?');
+	$stmt->execute(array($id));
 	$type = $stmt->fetch(); // Access first (and only) result line
 	return $type;
-}	
+}
+
+function AfficherIntitule($ID_THEME)
+{
+	$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
+	$stmt->execute(array($ID_THEME));
+	$intitule = $stmt->fetch(); // Access first (and only) result line
+	echo $intitule;
+}
 
 function QuestionVraiFaux($ID_THEME) //question vrai ou faux (TYPE_QUEST=0)
 {	
 	//if (TypeQuestion()==0)
-		
+		    AfficherIntitule($ID_THEME);
+
 			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
-			$stmt->execute(array($typeQuestion));
+			$stmt->execute(array($ID_THEME));
 			$intitule = $stmt->fetch(); // Access first (and only) result line
 		?>
 
 			<form method ="POST">
-				<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
+				<fieldset ><legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>
 				<br/>
 				<div align="center">
 					
@@ -104,12 +113,12 @@ function QuestionOuverte($ID_THEME) //question ouverte (TYPE_QUEST=1)
 	//if (TypeQuestion()==0)
 		
 			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
-			$stmt->execute(array($typeQuestion));
+			$stmt->execute(array($ID_THEME));
 			$intitule = $stmt->fetch(); // Access first (and only) result line
 		?>
 
 			<form method ="POST">
-				<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
+				<fieldset ><legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>
 				<br/>
 				<div align="center">
 					<div class="m-auto">
@@ -130,27 +139,27 @@ function QuestionCM($ID_THEME) //question choix multiple (TYPE_QUEST=2)
 	//if (TypeQuestion()==0)
 		
 			$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
-			$stmt->execute(array($typeQuestion));
+			$stmt->execute(array($ID_THEME));
 			$intitule = $stmt->fetch(); // Access first (and only) result line
 		?>
 
 			<form method ="POST">
-				<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
+				<fieldset ><legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>
 				<br/>
 				<div align="center">
 					
 					<div class="m-auto">
-						<label for="rep1"> réponse 1</label><br>
-						<input type="checkbox" id="rep1" name="rep1" value="Bike" size="17"/>
+						<label for="rep1"> réponse 1</label>
+						<input type="checkbox" id="rep1" name="rep1" value="Bike" size="17"/><br/>
 						
-						<label for="rep2"> réponse 2</label><br>
-						<input type="checkbox" id="rep2" name="rep2" value="Car" size="17"/>
+						<label for="rep2"> réponse 2</label>
+						<input type="checkbox" id="rep2" name="rep2" value="Car" size="17"/><br/>
 						
-						<label for="vehicle3"> réponse 3</label><br>
-						<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" size="17"/>
+						<label for="vehicle3"> réponse 3</label>
+						<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" size="17"/><br/>
 
-						<label for="rep4"> réponse 4</label><br>
-						<input type="checkbox" id="rep4" name="rep4" value="Train" size="17"/>
+						<label for="rep4"> réponse 4</label>
+						<input type="checkbox" id="rep4" name="rep4" value="Train" size="17"/><br/>
 						
 						
 					</div>
