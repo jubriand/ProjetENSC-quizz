@@ -18,8 +18,8 @@ $profil=$stmt->fetch();
             <br/><div class="jumbotron col-md-5 col-sm-7 text-center">
             
                 <h1> Profil </h1> <br/><br/>
-                <h4> Pseudo/Login: <?= $profil['PSEUDO'] ?> <a class="btn btn-secondary navbar-btn" type="button" href="ModifProfil.php?modif=PSEUDO"><img src="../Icons/svg/pencil.svg" alt="pencil"> Modifier</a> </h4>
-                <h4> Mot de passe: <?= $profil['MDP'] ?> <a class="btn btn-secondary navbar-btn" type="button" href="ModifProfil.php?modif=MDP"><img src="../Icons/svg/pencil.svg" alt="pencil"> Modifier</a> </h4>
+                <h4> Pseudo/Login: <?= $profil['PSEUDO'] ?> <?php AddModif("PSEUDO", "UTILISATEUR", $login); ?></h4>
+                <h4> Mot de passe: <?= $profil['MDP'] ?> <?php AddModif("MDP", "UTILISATEUR", $login); ?> </h4>
                 <h4> Administrateur: <?php if($profil['IS_ADMIN']==0){ print'OUI'; } else{ print'NON'; } ?></h4><br/>
                 <h3> Score total: <?= $profil['SCORE_TOTAL'] ?></h4>
 
