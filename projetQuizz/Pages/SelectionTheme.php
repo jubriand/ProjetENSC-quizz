@@ -23,10 +23,10 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                         </div>
                     <?php } ?>
                     <div class="col-md-7 col-sm-5">
-                        <h2 class= "text-center"><?= $theme['NOM_THEME'] ?></h2>
-                        <p>Nombre de questions: <?= $theme['NB_QUESTIONS'] ?> </p>
-                        <p>Temps imparti: <?= $theme['TIMER']/60 ?> minutes et <?= $theme['TIMER']%60 ?> secondes </p>
-                        <p><small><?= $theme['DESC_THEME'] ?></small></p>
+                        <h2 class= "text-center"><?= $theme['NOM_THEME'] ?></h2> 
+                        <p>Nombre de questions: <?= $theme['NB_QUESTIONS'] ?> <?php if($_SESSION['mode']=="admin"){AddModif("NB_QUESTIONS","THEME",$ID_THEME);}?></p>
+                        <p>Temps imparti: <?= $theme['TIMER']/60 ?> minutes et <?= $theme['TIMER']%60 ?> secondes <?php if($_SESSION['mode']=="admin"){AddModif("TIMER","THEME",$ID_THEME);}?></p>
+                        <p><small><?= $theme['DESC_THEME'] ?></small><?php if($_SESSION['mode']=="admin"){AddModif("DESC_THEME","THEME",$ID_THEME);}?></p>
 
                         <?php if($_SESSION['mode']=="joueur")
                         {?>
@@ -55,7 +55,7 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                     {?>
                         <hr/>
                         <h4>Question n°<?= $question['ID_QUEST']?>: </h4>
-                        <p>Intitulé: <?= $question['INTITULE'] ?> </p>
+                        <p>Intitulé: <?= $question['INTITULE'] ?> <?php AddModif("INTITULE","QUESTION",$question['ID_QUEST']);?></p>
                         <p>Type de Question: 
                         <?php if($question['TYPE_QUEST']==0)
                         {
@@ -83,7 +83,7 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                             {?>
                                 <div class="alert alert-danger" role="alert">
                             <?php } 
-                                print ''. $reponse['INTITULE']; ?>
+                                print ''. $reponse['INTITULE']; AddModif("INTITULE","REPONSE",$reponse['ID_REPONSE']);?>
                             </div>
                         <?php }
                     } ?>

@@ -29,6 +29,10 @@ function isAdmin(){
 function redirect($url) {
     header("Location: $url");
 }
+function AddModif($modif, $table, $id)
+{?>
+	<a class="btn btn-secondary navbar-btn" type="button" href="Modification.php?modif=<?=$modif?>&table=<?=$table?>&id=<?=$id?>"><img src="../Icons/svg/pencil.svg" alt="pencil"> Modifier</a>
+<?php }
 
 function formUser($type)
 {?>
