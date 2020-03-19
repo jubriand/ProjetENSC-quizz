@@ -13,30 +13,27 @@
 	$demande = getDb()->prepare('select COUNT(*) from question where ID_THEME=?');
 	$demande->execute(array($ID_THEME));
     $nbremax = $demande->fetch();
+	echo "theme:".(int)$nbremax."cense etre la valeur max      ";
 
 	//definir chiffre random 
-	$RANDINT= rand( 1, (int)$nbremax) ;
-
-	//on regarde le type de la question choisie au hasard 
-	//$TYPE_QUEST = $_GET['id'];
-	//$stmt = getDb()->prepare('select TYPE_QUEST from question where ID_QUEST=$RANDINT');
-	//$stmt->execute(array($TYPE_QUEST));
-	//$question = $stmt->fetch(); // Access first (and only) result line
+	$RANDINT= rand( 1, 3) ;
+	echo "id de la question:".(int)$RANDINT;
+	//on regarde le type de la question choisie au hasard 	
 	$demande1 = getDb()->prepare('select TYPE_QUEST from question where ID_QUEST=?');
 	$demande1->execute(array($RANDINT));
     $question = $demande1->fetch();
-    
-	if ((int)$question==0)
+
+	if ($question["TYPE_QUEST"]==0)
 	{
-		QuestionVraiFaux($ID_THEME);
+		QuestionVraiFaux($RANDINT); //est ce que le theme doit etre un argument à la fonction ? il faut tester
 	}
-	elseif ((int)$question==1) 
+	elseif ($question["TYPE_QUEST"]==1) 
 	{
-		QuestionOuverte($ID_THEME);
+		QuestionOuverte($RANDINT);
     }
-	elseif ((int)$question==2) 
+	elseif ($question["TYPE_QUEST"]==2) 
 	{
-		QuestionCM($ID_THEME);
+		QuestionCM($RANDINT);
     }
 
 	

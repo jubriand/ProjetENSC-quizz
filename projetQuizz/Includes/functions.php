@@ -71,20 +71,20 @@ function TypeQuestion($id)
 	return $type;
 }
 
-function AfficherIntitule($ID_THEME)
+function AfficherIntitule($ID_QUEST)
 {
-	$stmt = getDb()->prepare('select intitule from question where ID_THEME=?');
-	$stmt->execute(array($ID_THEME));
+	$stmt = getDb()->prepare('select intitule from question where ID_QUEST=?');
+	$stmt->execute(array($ID_QUEST));
 	$intitule = $stmt->fetch(); // Access first (and only) result line
 	?>
 	<legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>; <?php
 	
 }
 
-function QuestionVraiFaux($ID_THEME) //question vrai ou faux (TYPE_QUEST=0)
+function QuestionVraiFaux($ID_QUEST) //question vrai ou faux (TYPE_QUEST=0)
 {	
 	
-		    AfficherIntitule($ID_THEME);
+		    AfficherIntitule($ID_QUEST);
 
 		?>
 
@@ -107,9 +107,9 @@ function QuestionVraiFaux($ID_THEME) //question vrai ou faux (TYPE_QUEST=0)
 		<?php
 }
 
-function QuestionOuverte($ID_THEME) //question ouverte (TYPE_QUEST=1)
+function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 {	
-		AfficherIntitule($ID_THEME);
+		AfficherIntitule($ID_QUEST);
 		
 			
 		?>
@@ -131,15 +131,15 @@ function QuestionOuverte($ID_THEME) //question ouverte (TYPE_QUEST=1)
 		<?php
 }
 
-function QuestionCM($ID_THEME) //question choix multiple (TYPE_QUEST=2)
+function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
 {	
 	
 		
-		AfficherIntitule($ID_THEME);
+		AfficherIntitule($ID_QUEST);
 		?>
 
 			<form method ="POST">
-				<fieldset ><legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>
+				<fieldset ><legend class="text-center"> </legend>
 				<br/>
 				<div align="center">
 					
