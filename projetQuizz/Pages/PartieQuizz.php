@@ -9,14 +9,14 @@
 	$stmt->execute(array($ID_THEME));
 	$theme = $stmt->fetch(); // Access first (and only) result line
 
-	//on regarde le nombre max de question par theme 
-	$demande = getDb()->prepare('select COUNT(*) from question where ID_THEME=?');
+	//on regarde le nombre max de question par theme //ne fonctionne pas 
+	$demande = getDb()->prepare('select COUNT(*) from question GROUP BY ID_THEME=?');
 	$demande->execute(array($ID_THEME));
     $nbremax = $demande->fetch();
 	echo "theme:".(int)$nbremax."cense etre la valeur max      ";
 
 	//definir chiffre random 
-	$RANDINT= rand( 1, 4) ;
+	$RANDINT= rand( 1, 4) ; //mettre nbremax à la place du 4
 	echo "id de la question:".(int)$RANDINT;
 	//on regarde le type de la question choisie au hasard 	
 	$demande1 = getDb()->prepare('select TYPE_QUEST from question where ID_QUEST=?');
