@@ -87,6 +87,10 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                             </div>
                         <?php }
                     } ?>
+                    <br/>
+                    <div class="text-center">
+						<a class="btn btn-danger navbar-btn" type="button" href="AjoutQuestion.php?id=<?=$ID_THEME?>"> <h5>Ajouter une question</h5></a>
+					</div>
                 </div>
             <?php } ?>
             
