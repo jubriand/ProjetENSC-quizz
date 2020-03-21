@@ -95,9 +95,9 @@ function QuestionVraiFaux($ID_QUEST) //question vrai ou faux (TYPE_QUEST=0)
 					
 					<div class="m-auto">
 						<label for ="reponse"> Vrai </label>
-						<input type="radio" name="reponse" value="1" size="17"/>
+						<input type="radio" name="reponse" value="vrai" size="17"/>
 						<label for ="reponse"> Faux </label>
-						<input type="radio" name="reponse" value="0" size="17"/>
+						<input type="radio" name="reponse" value="faux" size="17"/>
 					</div>
 				</div>
 				
@@ -120,7 +120,7 @@ function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 				<div align="center">
 					<div class="m-auto">
 						
-						<input type="text" name="intitule" size ="17"/> <br/>
+						<input type="text" name="reponse" size ="17"/> <br/>
 					</div>
 					
 				</div>
@@ -145,16 +145,16 @@ function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
 					
 					<div class="m-auto">
 						<label for="rep1"> réponse 1</label>
-						<input type="checkbox" id="rep1" name="rep1" value="Bike" size="17"/><br/>
+						<input type="checkbox" id="rep1" name="rep1" value="1" size="17"/><br/>
 						
 						<label for="rep2"> réponse 2</label>
-						<input type="checkbox" id="rep2" name="rep2" value="Car" size="17"/><br/>
+						<input type="checkbox" id="rep2" name="rep2" value="2" size="17"/><br/>
 						
 						<label for="vehicle3"> réponse 3</label>
-						<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" size="17"/><br/>
+						<input type="checkbox" id="vehicle3" name="rep3" value="3" size="17"/><br/>
 
 						<label for="rep4"> réponse 4</label>
-						<input type="checkbox" id="rep4" name="rep4" value="Train" size="17"/><br/>
+						<input type="checkbox" id="rep4" name="rep4" value="4" size="17"/><br/>
 						
 						
 					</div>
@@ -164,5 +164,20 @@ function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
 				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
 			</form>	
 		<?php
-} ?>
+} 
+
+function Reponse($ID_QUEST)
+{
+	$stmt = getDb()->prepare('select intitule from reponse where ID_QUEST=?');
+	$stmt->execute(array($ID_QUEST));
+	$intitule = $stmt->fetch();
+	?>
+	<legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>; <?php
+	 if ($_POST['reponse']==$intitule['intitule'])
+	 {
+		
+	 }
+}
+?>
+
 </html>
