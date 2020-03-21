@@ -7,10 +7,7 @@ $nbReponses = $_GET['nbRep'];
 
 if (!empty($_POST['INTITULE1']) || $nbReponses==2) 
 {
-    $stmt = getDb()->prepare("select MAX(ID_REPONSE) as max from reponse");
-    $stmt->execute();
-    $max_id=$stmt->fetch();
-    $new_id=$max_id['max']+1;
+    $new_id=RecupNewId('REPONSE');
     
     if($nbReponses==2)
     {
@@ -31,7 +28,15 @@ if (!empty($_POST['INTITULE1']) || $nbReponses==2)
             $new_id++;
         }
     }
-    redirect("PageChoix.php");
+    if($_SESSION['new_theme']>1)
+    {
+        $_SESSION['new_theme']--;
+        redirect("AjoutQuestion.php");
+    }
+    else
+    {
+        redirect("PageChoix.php");
+    }
 }
 ?>
     
@@ -41,7 +46,7 @@ if (!empty($_POST['INTITULE1']) || $nbReponses==2)
         <?php require_once "../Includes/header.php" ;?>
         <div class="container-fluid"> <br/>
             <form method ="POST">   
-                <fieldset ><legend class="text-center"> <h3>Ajout d'une question </h3></legend>
+                <fieldset ><legend class="text-center"> <h3>Ajout d'une question</h3></legend>
                 <div class="text-center">
                     <hr/>
                     <h5>Réponses</h5>
@@ -54,11 +59,13 @@ if (!empty($_POST['INTITULE1']) || $nbReponses==2)
                         </div>
                         Cette proposition est-elle juste?
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="IS_TRUE<?=$i?>" id="Oui" value="0">
+                            <input class="form-check-input" type="radio" name="IS_TRUE<?=$i?>" id="Oui" value="0"
+                            <?php if($nbReponses==1){?> checked <?php }?> >
                             <label class="form-check-label" for="Oui">Oui</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="IS_TRUE<?=$i?>" id="Non" value="1"checked>
+                            <input class="form-check-input" type="radio" name="IS_TRUE<?=$i?>" id="Non" value="1" 
+                            <?php if($nbReponses==1){?> disabled <?php } else{?> checked <?php }?>>
                             <label class="form-check-label" for="Non">Non</label>
                         </div>
                     <?php } ?>
