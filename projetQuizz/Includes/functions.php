@@ -83,7 +83,7 @@ function RecupNewId($table)
 	return $new_id;
 }
 
-function AddSupp($element)
+function AddSupp($element, $ID_QUEST='')
 {?>
 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Supp<?=$element?>">
     	<h6>Supprimer</h6>
@@ -104,7 +104,7 @@ function AddSupp($element)
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                    <a type="button" class="btn btn-primary" href="Supp<?=$element?>.php<?php if($element=='Question'){?>?id=<?=$question['ID_QUEST']?> <?php }?>">Oui</a>
+                    <a type="button" class="btn btn-primary" href="Supp<?=$element?>.php<?php if($element=='Question'){?>?id=<?=$ID_QUEST?> <?php }?>">Oui</a>
                 </div>
             </div>
         </div>
