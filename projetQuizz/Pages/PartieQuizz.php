@@ -26,6 +26,7 @@
 	if ($question["TYPE_QUEST"]==0)
 	{
 		QuestionVraiFaux($RANDINT); //est ce que le theme doit etre un argument à la fonction ? il faut tester
+	
 	}
 	elseif ($question["TYPE_QUEST"]==1) 
 	{
@@ -35,7 +36,8 @@
 	{
 		QuestionCM($RANDINT);
     }
-
+	
+	Reponse($RANDINT);
 	
 
 ?>

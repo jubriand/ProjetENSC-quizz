@@ -102,7 +102,7 @@ function QuestionVraiFaux($ID_QUEST) //question vrai ou faux (TYPE_QUEST=0)
 				</div>
 				
 				
-				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+				<p class="text-center"> <input type="submit" value="Envoyer" href="PartieQuizzRep.php"/> </p>
 			</form>	
 		<?php
 }
@@ -126,7 +126,7 @@ function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 				</div>
 				
 				
-				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+				<p class="text-center"> <input type="submit" value="Envoyer" href="PartieQuizzRep.php"/> </p>
 			</form>	
 		<?php
 }
@@ -161,7 +161,7 @@ function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
 				</div>
 				
 				
-				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+				<p class="text-center"> <input type="submit" value="Envoyer" href="PartieQuizzRep.php"/> </p>
 			</form>	
 		<?php
 } 
@@ -171,11 +171,14 @@ function Reponse($ID_QUEST)
 	$stmt = getDb()->prepare('select intitule from reponse where ID_QUEST=?');
 	$stmt->execute(array($ID_QUEST));
 	$intitule = $stmt->fetch();
-	?>
-	<legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>; <?php
 	 if ($_POST['reponse']==$intitule['intitule'])
 	 {
-		
+		print "Bravo, la réponse est juste";
+	 }
+	 else 
+	 {
+	 	 print "la reponse est fausse, la bonne réponse était : "; ?>
+		 <legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>;<?php
 	 }
 }
 ?>
