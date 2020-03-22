@@ -62,6 +62,55 @@ function formUser($type)
     </form>
 <?php }
 
+function RecupNewId($table)
+{
+	if($table=='THEME')
+	{
+		$id='ID_THEME';
+	}
+	else if($table=='QUESTION')
+	{
+		$id='ID_QUEST';
+	}
+	else if($table=='REPONSE')
+	{
+		$id='ID_REPONSE';
+	}
+	$stmt = getDb()->prepare("select MAX($id) as max from `".$table."`");
+    $stmt->execute();
+    $max_id=$stmt->fetch();
+	$new_id=$max_id['max']+1;
+	return $new_id;
+}
+
+function AddSupp($element)
+{?>
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Supp<?=$element?>">
+    	<h6>Supprimer</h6>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="Supp<?=$element?>" tabindex="-1" role="dialog" aria-labelledby="Supp<?=$element?>Label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Supp<?=$element?>Label"><img src="../Icons/svg/warning.svg" alt="warning"> Attention!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	            <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+        	        Êtes-vous bien sûr de vouloir supprimer définitivement ce <?=$element?>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <a type="button" class="btn btn-primary" href="Supp<?=$element?>.php<?php if($element=='Question'){?>?id=<?=$question['ID_QUEST']?> <?php }?>">Oui</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php }
+
 function TypeQuestion($id)
 {
 

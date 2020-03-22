@@ -2,24 +2,14 @@
 require_once "../Includes/head.php";
 require_once "../Includes/functions.php";
 session_start();
-$ID_THEME = $_GET['id'];
+$ID_THEME = $_SESSION['ID_THEME'];
 
 if (!empty($_POST['INTITULE']) and !empty($_POST['TYPE_QUEST'])) 
 {
     $intitule=$_POST['INTITULE'];
     $type_quest=$_POST['TYPE_QUEST'];
-    if(!empty($_POST['MEDIA']))
-    {
-        $media=$_POST['MEDIA'];
-    }
-    else
-    {
-        $media=null;
-    }
-    $stmt = getDb()->prepare("select MAX(ID_QUEST) as max from question");
-    $stmt->execute();
-    $max_id=$stmt->fetch();
-    $new_id=$max_id['max']+1;
+    $media=$_POST['MEDIA'];
+    $new_id=RecupNewId('QUESTION');
 
     $stmt = getDb()->prepare("insert into question values('$new_id', '$intitule', '$type_quest', '$media', '$ID_THEME')");
     $stmt->execute();
@@ -46,7 +36,7 @@ if (!empty($_POST['INTITULE']) and !empty($_POST['TYPE_QUEST']))
         <?php require_once "../Includes/header.php" ;?>
         <div class="container-fluid"> <br/>
             <form method ="POST">   
-                <fieldset ><legend class="text-center"> <h3>Ajout d'une question </h3></legend>
+                <fieldset ><legend class="text-center"> <h3>Ajout d'une question</h3></legend>
                 <div class="text-center">
                     <hr/>
                     <h5>Question</h5>
@@ -65,7 +55,7 @@ if (!empty($_POST['INTITULE']) and !empty($_POST['TYPE_QUEST']))
                     </div>
                     <div class="form-group">
                         <label for="MEDIA">Ajoutez une image/video si vous le souhaitez: </label>
-                        <input type="file" class="form-control-file" accept="image/*,video/*" id="MEDIA">
+                        <input type="file" class="form-control-file" accept="image/*,video/*" name="MEDIA">
                     </div>
                 
                     <br/><button type="submit" class="btn btn-primary">Ajouter</button>

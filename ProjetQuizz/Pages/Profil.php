@@ -23,30 +23,7 @@ $profil=$stmt->fetch();
                 <h4> Administrateur: <?php if($profil['IS_ADMIN']==0){ print'OUI'; } else{ print'NON'; } ?></h4><br/>
                 <h3> Score total: <?= $profil['SCORE_TOTAL'] ?></h4>
 
-                </br></br><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#SuppCompte">
-                <h6>Supprimer le compte</h6>
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="SuppCompte" tabindex="-1" role="dialog" aria-labelledby="SuppCompteLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="SuppCompteLabel"><img src="../Icons/svg/warning.svg" alt="warning"> Attention!</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Êtes-vous bien sûr de vouloir supprimer définitivement ce compte?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <a type="button" class="btn btn-primary" href="SuppCompte.php">Oui</a>
-                        </div>
-                    </div>
-                </div>
-                </div>
+                </br></br><?php AddSupp('Compte'); ?>
 
             </div>
 		</div>
