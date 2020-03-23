@@ -5,29 +5,19 @@ session_start();
 $ID_QUEST = $_GET['id'];
 $nbReponses = $_GET['nbRep'];
 
-if (!empty($_POST['INTITULE1']) || $nbReponses==2) 
+if (!empty($_POST['INTITULE1'])) 
 {
     $new_id=RecupNewId('REPONSE');
     
-    if($nbReponses==2)
+    for($i=1; $i<=$nbReponses; $i++)
     {
-        $stmt = getDb()->prepare("insert into reponse values('$new_id', 'VRAI', 0, $ID_QUEST)");
+        $intitule=$_POST['INTITULE'.$i];
+        $is_true=$_POST['IS_TRUE'.$i];
+        $stmt = getDb()->prepare("insert into reponse values('$new_id', '$intitule', '$is_true', '$ID_QUEST')");
         $stmt->execute();
         $new_id++;
-        $stmt = getDb()->prepare("insert into reponse values('$new_id', 'FAUX', 1, $ID_QUEST)");
-        $stmt->execute();
     }
-    else
-    {
-        for($i=1; $i<=$nbReponses; $i++)
-        {
-            $intitule=$_POST['INTITULE'.$i];
-            $is_true=$_POST['IS_TRUE'.$i];
-            $stmt = getDb()->prepare("insert into reponse values('$new_id', '$intitule', '$is_true', '$ID_QUEST')");
-            $stmt->execute();
-            $new_id++;
-        }
-    }
+    
     if($_SESSION['new_theme']>1)
     {
         $_SESSION['new_theme']--;
@@ -54,7 +44,19 @@ if (!empty($_POST['INTITULE1']) || $nbReponses==2)
                             <hr/>
                             <div class="form-group">
                                 <label for ="INTITULE<?=$i?>"> Rentrez l'intitulé de la proposition n°<?=$i?>: </label>
-                                <input type="text" name="INTITULE<?=$i?>" size ="50"/> <br/>
+                                <?php if($i==1 && $nbReponses==2)
+                                { ?>
+                                    <input type="text" readonly class="form-control-plaintext text-center" name="INTITULE<?=$i?>" size ="50" value="Vrai"/> <br/>
+                                <?php }
+                                else if($i==2 && $nbReponses==2)
+                                { ?>
+                                    <input type="text" readonly class="form-control-plaintext text-center" name="INTITULE<?=$i?>" size ="50" value="Faux"/> <br/>
+                                <?php }
+                                else
+                                { ?>
+                                    <input type="text" name="INTITULE<?=$i?>" size ="50"/> <br/>
+                                <?php } ?>
+                                
                             </div>
                             Cette proposition est-elle juste?
                             <div class="form-check">

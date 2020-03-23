@@ -170,14 +170,13 @@ function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 			<form method ="POST" action="PartieQuizzRep.php"> 
 				<fieldset ><legend class="text-center"action="PartieQuizzRep.php"> </legend>
 				<br/>
-				<div align="center">
+				<div class="text-center">
 					<div class="m-auto">
-						
-						<input type="text" name="reponse" size ="17"/> <br/>
+						<input type="text" name="reponse" size ="50"/> <br/>
 					</div>
 					
 				</div>
-				
+				</fieldset>
 				
 				<p class="text-center"> <input type="submit" value="Envoyer" /> </p>
 			</form>	
