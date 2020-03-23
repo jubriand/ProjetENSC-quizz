@@ -79,8 +79,8 @@ function RecupNewId($table)
 	}
 	$stmt = getDb()->prepare("select MAX($id) as max from `".$table."`");
     $stmt->execute();
-    $max_id=$stmt->fetch();
-	$new_id=$max_id['max']+1;
+    $row=$stmt->fetch();
+	$new_id=$row['max']+1;
 	return $new_id;
 }
 

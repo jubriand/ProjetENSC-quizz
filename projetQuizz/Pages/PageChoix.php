@@ -15,23 +15,28 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 		<div class="container-fluid"><br/>
 			<h1 class="text-center"> Themes </h1> <br/><br/>
 				<?php 
-					$i=0;
-					foreach ($themes as $theme) 
-					{ 
+				$i=0;
+				foreach ($themes as $theme) 
+				{ 
+					$stmt= getDb()->prepare("select count(ID_QUEST) as nbQuest from question where ID_THEME=?");
+					$stmt->execute(array($theme['ID_THEME']));
+					$row=$stmt->fetch();
+					if($_SESSION['mode']=='admin' or $row['nbQuest']>=$theme['NB_QUESTIONS'])
+					{
 						if($i%3==0)
 						{
 							print "<div class='row'>";
 						}
-				?>
+						?>
 						<div class="col"> <p class="text-center"> <a href="SelectionTheme.php?id=<?= $theme['ID_THEME'] ?>" class="btn btn-primary btn-lg"> <?= $theme['NOM_THEME'] ?> </a> </p> </div>
 						<?php	
-							$i++;  
-							if($i%3==0)
-							{
-								print "</div></br>";
-							}
-
-					}	?>
+						$i++;  
+						if($i%3==0)
+						{
+							print "</div></br>";
+						}
+					}
+				}?>
 				</div>
 			<br/>
 			<?php if(isUserConnected())

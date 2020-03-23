@@ -37,7 +37,7 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                             <br/>
                             <h5 class= "text-center">Choix de la difficulté:</h5>
                             <div class='row'>
-                                <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>?diff=1" class="btn btn-primary btn-lg"> Facile</a> </p> </div>
+                                <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>?diff=1" class="btn btn-success btn-lg"> Facile</a> </p> </div>
                                 <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>?diff=2" class="btn btn-warning btn-lg"> Moyen </a> </p> </div>
                                 <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?id=<?= $theme['ID_THEME'] ?>?diff=3" class="btn btn-danger btn-lg"> Difficile </a> </p> </div>
                             </div>
