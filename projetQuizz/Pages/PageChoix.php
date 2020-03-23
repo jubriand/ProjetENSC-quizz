@@ -3,7 +3,7 @@ require_once "../Includes/functions.php";
 session_start();
 require_once "../Includes/head.php"; 
 
-
+$_SESSION['mode']=='joueur';
 
 // Recuperer tous les themes
 $themes = getDb()->query('select * from theme order by ID_THEME'); 
