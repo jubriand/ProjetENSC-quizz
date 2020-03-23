@@ -39,26 +39,27 @@ function formUser($type)
     <form method ="POST">
 		
 		<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
-		<br/>
-		<div class="row align-items-center">
-			<div class="m-auto">
-				<label for ="login"> Login : </label>
-				<input type="text" name="login" size ="17"/> <br/>
+			<br/>
+			<div class="row align-items-center">
+				<div class="m-auto">
+					<label for ="login"> Login : </label>
+					<input type="text" name="login" size ="17"/> <br/>
+				</div>
+				<div class="m-auto">
+					<label for ="mdp"> Mot de passe : </label>
+					<input type="password" name="mdp" size="17"/>
+				</div>
+				<?php if($type=='Inscription'){?>
+					<div class="m-auto">
+					<label for ="mdp"> Cochez cette case pour être administrateur: </label>
+					<input type="radio" name="admin"/>
+					</div>
+				<?php } ?>
 			</div>
-			<div class="m-auto">
-				<label for ="mdp"> Mot de passe : </label>
-				<input type="password" name="mdp" size="17"/>
-			</div>
-            <?php if($type=='Inscription'){?>
-                <div class="m-auto">
-				<label for ="mdp"> Cochez cette case pour être administrateur: </label>
-				<input type="radio" name="admin"/>
-			    </div>
-            <?php } ?>
-		</div>
-		
-		
-		<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+			
+			
+			<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+		</fieldset>
     </form>
 <?php }
 
@@ -85,22 +86,22 @@ function RecupNewId($table)
 
 function AddSupp($element, $ID_QUEST='')
 {?>
-	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Supp<?=$element?>">
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Supp<?=$element?><?=$ID_QUEST?>">
     	<h6>Supprimer</h6>
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="Supp<?=$element?>" tabindex="-1" role="dialog" aria-labelledby="Supp<?=$element?>Label" aria-hidden="true">
+    <div class="modal fade" id="Supp<?=$element?><?=$ID_QUEST?>" tabindex="-1" role="dialog" aria-labelledby="Supp<?=$element?><?=$ID_QUEST?>Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="Supp<?=$element?>Label"><img src="../Icons/svg/warning.svg" alt="warning"> Attention!</h5>
+                    <h5 class="modal-title" id="Supp<?=$element?><?=$ID_QUEST?>Label"><img src="../Icons/svg/warning.svg" alt="warning"> Attention!</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         	            <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-        	        Êtes-vous bien sûr de vouloir supprimer définitivement ce <?=$element?>?
+        	        Êtes-vous bien sûr de vouloir supprimer définitivement <?php if($element=='Question'){print "cette";} else{print "ce";} print" ".$element;?>?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
