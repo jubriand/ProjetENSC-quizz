@@ -10,10 +10,10 @@
 			Reponse($ID_QUEST);
 
 
+		?>
+		<p class="text-center"> <input type="submit" value="Question suivante"/> </p>
 
-
-
-	
+		
 		<?php require_once "../Includes/footer.php"; ?> 
 		<?php require_once "../Includes/scripts.php"; ?> 
 	</body>

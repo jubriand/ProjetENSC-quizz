@@ -136,8 +136,8 @@ function QuestionVraiFaux($ID_QUEST) //question vrai ou faux (TYPE_QUEST=0)
 		    AfficherIntitule($ID_QUEST);
 
 		?>
-
-			<form method ="POST">
+		
+			<form method ="POST" action="PartieQuizzRep.php?rep=<?value ?>"> 
 				<fieldset ><legend class="text-center">  </legend>
 				<br/>
 				<div align="center">
@@ -151,10 +151,11 @@ function QuestionVraiFaux($ID_QUEST) //question vrai ou faux (TYPE_QUEST=0)
 				</div>
 				
 				
-				<p class="text-center"> <input type="submit" value="Envoyer" href="PartieQuizzRep.php"/> </p>
-			</form>	
+				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
+			</form>
+			$rep=value;
 		<?php
-}
+} //?quest=<?= $question['ID_QUEST']?
 
 function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 {	
@@ -163,8 +164,8 @@ function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 			
 		?>
 
-			<form method ="POST">
-				<fieldset ><legend class="text-center"> </legend>
+			<form method ="POST" action="PartieQuizzRep.php"> 
+				<fieldset ><legend class="text-center"action="PartieQuizzRep.php"> </legend>
 				<br/>
 				<div align="center">
 					<div class="m-auto">
@@ -175,7 +176,7 @@ function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 				</div>
 				
 				
-				<p class="text-center"> <input type="submit" value="Envoyer" href="PartieQuizzRep.php"/> </p>
+				<p class="text-center"> <input type="submit" value="Envoyer" /> </p>
 			</form>	
 		<?php
 }
@@ -187,7 +188,7 @@ function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
 		AfficherIntitule($ID_QUEST);
 		?>
 
-			<form method ="POST">
+			<form method ="POST" action="PartieQuizzRep.php">
 				<fieldset ><legend class="text-center"> </legend>
 				<br/>
 				<div align="center">
@@ -210,7 +211,7 @@ function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
 				</div>
 				
 				
-				<p class="text-center"> <input type="submit" value="Envoyer" href="PartieQuizzRep.php"/> </p>
+				<p class="text-center"> <input type="submit" value="Envoyer" /> </p>
 			</form>	
 		<?php
 } 
