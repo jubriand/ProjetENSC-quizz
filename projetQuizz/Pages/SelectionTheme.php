@@ -56,11 +56,13 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                 ?>
                 <br/><div class="jumbotron">
                     <h3 class="text-center"> Liste des questions </h3>
-                    <?php foreach($questions as $question)
+                    <?php
+                    $i=1; 
+                    foreach($questions as $question)
                     {?>
                         <hr/>
-                        <div class='text-right'><?php AddSupp('Question');?></div>
-                        <h4>Question n°<?= $question['ID_QUEST']?>: </h4> 
+                        <div class='text-right'><?php AddSupp('Question', $question['ID_QUEST']);?></div>
+                        <h4>Question n°<?= $i?>: </h4> 
                         <p>Intitulé: <?= $question['INTITULE'] ?> <?php AddModif("INTITULE","QUESTION",$question['ID_QUEST']);?></p>
                         <p>Type de Question: 
                         <?php if($question['TYPE_QUEST']==0)
@@ -92,6 +94,7 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                                 print ''. $reponse['INTITULE']; AddModif("INTITULE","REPONSE",$reponse['ID_REPONSE']);?>
                             </div>
                         <?php }
+                        $i++;
                     } ?>
                     <br/>
                     <div class="text-center">
