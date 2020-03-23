@@ -127,7 +127,9 @@ function AfficherIntitule($ID_QUEST)
 	$stmt->execute(array($ID_QUEST));
 	$intitule = $stmt->fetch(); // Access first (and only) result line
 	?>
-	<legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>; <?php
+	<legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>; 
+	<img class="img-fluid" src="../Images/Im_quest/<?= $question['MEDIA'] ?>" />
+	<?php
 	
 }
 
@@ -221,15 +223,15 @@ function Reponse($ID_QUEST)
 {
 	$stmt = getDb()->prepare('select intitule from reponse where ID_QUEST=?');
 	$stmt->execute(array($ID_QUEST));
-	$intitule = $stmt->fetch();
-	 if ($_POST['reponse']==$intitule['intitule'])
+	$reponse = $stmt->fetch();
+	 if ($_POST['reponse']==$reponse['intitule'])
 	 {
 		print "Bravo, la réponse est juste";
 	 }
 	 else 
 	 {
 	 	 print "la reponse est fausse, la bonne réponse était : "; ?>
-		 <legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>;<?php
+		 <legend class="text-center"> <?php print $reponse['intitule']; ?> </legend>;<?php
 	 }
 }
 ?>

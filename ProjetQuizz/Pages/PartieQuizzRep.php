@@ -11,7 +11,7 @@
 
 
 		?>
-		<p class="text-center"> <input type="submit" value="Question suivante"/> </p>
+		<p class="text-center"> <input type="button" value="Question suivante"/> </p>
 
 		
 		<?php require_once "../Includes/footer.php"; ?> 
