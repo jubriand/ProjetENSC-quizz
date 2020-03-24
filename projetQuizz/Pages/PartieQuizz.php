@@ -3,25 +3,44 @@
 	require_once "../Includes/head.php"; 
 	session_start();
 	
-	$difficulte=$_GET['diff'];
-
+	//On cherche à savoir si c'est le début de la partie ou non
+	if(!isset($_SESSION['diff']))
+	{
+		$difficulte=$_GET['diff'];
+		$_SESSION['diff']=$difficulte;
+		$_SESSION['score']=0;
+		$_SESSION['questionsPassees']=array();
+	}
+	else
+	{
+		$difficulte=$_SESSION['diff'];
+	}
+	
+	//On récupère le thème joué
 	$ID_THEME = $_SESSION['ID_THEME'];
 	$stmt = getDb()->prepare('select * from theme where ID_THEME=?');
 	$stmt->execute(array($ID_THEME));
-	$theme = $stmt->fetch(); // Access first (and only) result line
+	$theme = $stmt->fetch();
 
-	//on regarde le nombre max de question par theme //ne fonctionne pas 
-	$demande= getDb()->prepare("select count(ID_QUEST) as nbQuest from question where ID_THEME=?");
+	//On regarde si la partie est finie
+	if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'])
+	{
+		redirect("PartieQuizzResult.php");
+	}
+
+	//on regarde le nombre max de questions par theme
+	$demande= getDb()->prepare("select count(ID_QUEST) as nbQuest from question where ID_THEME=? and ID_QUEST not in ( '" . implode( "', '" ,$_SESSION['questionsPassees'] ) . "' )");
 	$demande->execute(array($theme['ID_THEME']));
 	$row=$demande->fetch();
 	$nbremax=$row['nbQuest'];
 
-	//definir chiffre random 
-	$RANDINT= random_int( 1, $nbremax) ; 
-
-	//on recupère la question choisie au hasard 	
-	$questions = getDb()->prepare('select * from question where ID_THEME=?');
+	//On récupère les questions liées à ce thème
+	$questions = getDb()->prepare("select * from question where ID_THEME=? and ID_QUEST not in  ( '" . implode( "', '" ,$_SESSION['questionsPassees'] ) . "' )");
 	$questions->execute(array($theme['ID_THEME']));
+
+	//On tire au hasard un nombre 
+	$RANDINT= random_int( 1, $nbremax);
+	//on recupère la question choisie au hasard 	
 	$i=1;
 	foreach($questions as $question)
 	{
@@ -31,6 +50,11 @@
 		}
 		$i++;
 	}
+
+	
+
+	//On garde en memoire l'ID de la question sélectionnée
+	$_SESSION['questionsPassees'][]=$ID_QUEST;
 
 	//on recupère la question choisie au hasard 	
 	$demande2 = getDb()->prepare('select * from question where ID_QUEST=?');

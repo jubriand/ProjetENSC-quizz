@@ -12,11 +12,7 @@ if($typeQuest==1)
 	$reponse=$stmt->fetch();
 	if($reponse['INTITULE']==$_POST['reponse'])
 	{
-		$reussite=true;
-	}
-	else
-	{
-	$reussite=false;
+		$_SESSION['score']++;
 	}
 }
 else
@@ -26,15 +22,13 @@ else
 	$reponse=$stmt->fetch();
 	if($reponse['IS_TRUE']==0)
 	{
-		$reussite=true;
+		$_SESSION['score']++;
 	}
-	else
-	{
-		$reussite=false;
-	}
-} ?>
+}
+redirect("PartieQuizz.php"); 
+?>
 
-<html>
+<!--<html>
 	<body>
 		<?php require_once "../Includes/header.php"; ?>
 		<div class="container-fluid">
@@ -55,4 +49,4 @@ else
 		<?php require_once "../Includes/footer.php"; ?> 
 		<?php require_once "../Includes/scripts.php"; ?> 
 	</body>
-</html>
+</html>-->

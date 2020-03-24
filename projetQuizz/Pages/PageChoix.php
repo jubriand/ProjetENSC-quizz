@@ -3,7 +3,27 @@ require_once "../Includes/functions.php";
 session_start();
 require_once "../Includes/head.php"; 
 
-$_SESSION['mode']=='joueur';
+if(!isset($_SESSION['mode']))//Les personnes non connectés sont obligatoirement des joueurs
+{
+	$_SESSION['mode']='joueur';
+}
+//On supprime toutes les variables en session 
+if(isset($_SESSION['diff']))
+{
+	unset($_SESSION['diff']);
+}
+if(isset($_SESSION['score']))
+{
+	unset($_SESSION['score']);
+}
+if(isset($_SESSION['questionsPassees']))
+{
+	unset($_SESSION['questionsPassees']);
+}
+if(isset($_SESSION['ID_THEME']))
+{
+	unset($_SESSION['ID_THEME']);
+}
 
 // Recuperer tous les themes
 $themes = getDb()->query('select * from theme order by ID_THEME'); 
