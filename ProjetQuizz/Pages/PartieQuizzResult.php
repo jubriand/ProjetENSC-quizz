@@ -57,9 +57,9 @@ $ratio=$_SESSION['score']/$theme['NB_QUESTIONS'];
                 { ?>
                     <h5>Dommage, la prochaine fois sera la bonne</h5>
                 <?php }
-                else if($ratio>0)
+                else if($ratio>=0)
                 { ?>
-                    <h5>Bravo, vous avez le niveau d'un enfant de CM2!</h5>
+                    <h5>Bravo, vous avez le Q.I. d'un enfant de CM2!</h5>
                 <?php } ?>
 			</div>
 		</div>

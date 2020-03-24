@@ -3,6 +3,13 @@
 	require_once "../Includes/head.php"; 
 	session_start();
 	
+	//On récupère le thème joué
+	$ID_THEME = $_SESSION['ID_THEME'];
+	$stmt = getDb()->prepare('select * from theme where ID_THEME=?');
+	$stmt->execute(array($ID_THEME));
+	$theme = $stmt->fetch();
+
+
 	//On cherche à savoir si c'est le début de la partie ou non
 	if(!isset($_SESSION['diff']))
 	{
@@ -15,12 +22,6 @@
 	{
 		$difficulte=$_SESSION['diff'];
 	}
-	
-	//On récupère le thème joué
-	$ID_THEME = $_SESSION['ID_THEME'];
-	$stmt = getDb()->prepare('select * from theme where ID_THEME=?');
-	$stmt->execute(array($ID_THEME));
-	$theme = $stmt->fetch();
 
 	//On regarde si la partie est finie
 	if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'])
@@ -122,58 +123,65 @@
 			Reponse($RANDINT);
 			*/
 			?>
-			
-			<?php if($question['MEDIA']!=null)
-			{?>
-				<div class="col-md-4 col-sm-6">
-                    <img class="img-fluid" src="../Images/<?= $question['MEDIA'] ?>" title="<?= $question['MEDIA'] ?>" />
-                </div>
-			<?php }?>
-
-			<div class="text-center <?php if($question['MEDIA']!=null) { ?> col-md-8 col-sm-6 <?php } ?>">
-				<br/><h4><?=$question['INTITULE']?></h4><br/>
-					
-				<?php if ($question["TYPE_QUEST"]==1)
-				{ ?>
-					<form method ="POST" action="PartieQuizzRep.php?id=<?=$ID_QUEST?>&typeQuest=<?=$question["TYPE_QUEST"]?>"> 
-						<fieldset ><legend class="text-center"action="PartieQuizzRep.php"> </legend>
-						<div class="text-center">
-							<div class="m-auto">
-								<input type="text" name="reponse" size ="50"/> <br/>
-							</div>
+			<br/>
+			<div class="jumbotron">
+				<?php if($question['MEDIA']!=null)
+				{?>
+					<div class="row">
+						<div class="col-md-4 col-sm-6">
+							<img class="img-fluid" src="../Images/<?= $question['MEDIA'] ?>" title="<?= $question['MEDIA'] ?>" />
 						</div>
-						</fieldset>
-						<br/>
-						<p class="text-center"><button type="submit" class="btn btn-primary">Valider</button> </p>
-					</form>	
-				<?php }
-				else
-				{
-					$i=0;
-					foreach ($reponses as $reponse) 
-					{ 
-						if($i<(3+$difficulte))
+				<?php }?>
+
+					<div class="text-center <?php if($question['MEDIA']!=null) { ?> col-md-8 col-sm-6 <?php } ?>">
+						<br/><h4><?=$question['INTITULE']?></h4><br/>
+							
+						<?php if ($question["TYPE_QUEST"]==1)
+						{ ?>
+							<form method ="POST" action="PartieQuizzRep.php?id=<?=$ID_QUEST?>&typeQuest=<?=$question["TYPE_QUEST"]?>"> 
+								<fieldset ><legend class="text-center"action="PartieQuizzRep.php"> </legend>
+								<div class="text-center">
+									<div class="m-auto">
+										<input type="text" name="reponse" size ="50"/> <br/>
+									</div>
+								</div>
+								</fieldset>
+								<br/>
+								<p class="text-center"><button type="submit" class="btn btn-primary">Valider</button> </p>
+							</form>	
+						<?php }
+						else
 						{
-							if($i%3==0)
-							{
-								print "<div class='row'>";
+							$i=0;
+							foreach ($reponses as $reponse) 
+							{ 
+								if($i<(3+$difficulte))
+								{
+									if($i%3==0)
+									{
+										print "<div class='row'>";
+									}
+									if($question["TYPE_QUEST"]==2)
+									{ ?>
+										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $positions[$i]['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg"> <?= $positions[$i]['INTITULE'] ?> </a> </p> </div>
+									<?php }
+									else 
+									{ ?>
+										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $reponse['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg"> <?= $reponse['INTITULE'] ?> </a> </p> </div>
+									<?php }
+									$i++;  
+									if($i%3==0)
+									{
+										print "</div></br>";
+									}
+								}
 							}
-							if($question["TYPE_QUEST"]==2)
-							{ ?>
-								<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $positions[$i]['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg"> <?= $positions[$i]['INTITULE'] ?> </a> </p> </div>
-							<?php }
-							else 
-							{ ?>
-								<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $reponse['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg"> <?= $reponse['INTITULE'] ?> </a> </p> </div>
-							<?php }
-							$i++;  
-							if($i%3==0)
-							{
-								print "</div></br>";
-							}
-						}
-					}
-				}?>
+						}?>
+					</div>
+				<?php if($question['MEDIA']!=null)
+				{
+					print"</div>";
+				} ?>
 			</div>
 		</div>
 		<?php require_once "../Includes/footer.php"; ?> 
