@@ -17,14 +17,6 @@
 	$nbremax=$row['nbQuest'];
 
 	//definir chiffre random 
-<<<<<<< HEAD
-	$RANDINT= rand( 1, $nbremax+1) ; //mettre nbremax � la place du 4
-	echo "id de la question:".(int)$RANDINT;
-	//on regarde le type de la question choisie au hasard 	
-	$demande1 = getDb()->prepare('select TYPE_QUEST from question where ID_QUEST=?');
-	$demande1->execute(array($RANDINT));
-    $question = $demande1->fetch();
-=======
 	$RANDINT= random_int( 1, $nbremax) ; 
 
 	//on recupère la question choisie au hasard 	
@@ -80,7 +72,6 @@
 
 	$reponses = getDb()->prepare('select * from reponse where ID_QUEST=?');
 	$reponses->execute(array($ID_QUEST));
->>>>>>> 273a5ea06241aec3338a5db7b9774e65f86cd4ef
 	
 
 ?>

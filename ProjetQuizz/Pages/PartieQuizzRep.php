@@ -34,11 +34,6 @@ else
 	}
 } ?>
 
-<<<<<<< HEAD
-
-		?>
-		<p class="text-center"> <input type="button" value="Question suivante"/> </p>
-=======
 <html>
 	<body>
 		<?php require_once "../Includes/header.php"; ?>
@@ -55,7 +50,6 @@ else
 				<a href="PartieQuizz.php?id=<?= $positions[$i]['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg"> <?= $positions[$i]['INTITULE'] ?> </a> 
 			</div>
 		</div>
->>>>>>> 273a5ea06241aec3338a5db7b9774e65f86cd4ef
 
 		
 		<?php require_once "../Includes/footer.php"; ?> 
