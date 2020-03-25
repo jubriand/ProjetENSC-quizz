@@ -25,7 +25,7 @@ if (!empty($_POST['INTITULE1']))
     }
     else
     {
-        redirect("PageChoix.php");
+        redirect("SelectionTheme.php");
     }
 }
 ?>

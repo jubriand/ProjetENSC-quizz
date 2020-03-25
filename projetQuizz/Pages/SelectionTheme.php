@@ -3,8 +3,16 @@ require_once "../Includes/functions.php";
 require_once "../Includes/head.php";
 session_start();
 
-$ID_THEME = $_GET['id'];
-$_SESSION['ID_THEME']=$ID_THEME;
+if(!isset($_SESSION['ID_THEME']))
+{
+    $ID_THEME = $_GET['id'];
+    $_SESSION['ID_THEME']=$ID_THEME;
+}
+else
+{
+    $ID_THEME=$_SESSION['ID_THEME'];
+}
+
 $stmt = getDb()->prepare('select * from theme where ID_THEME=?');
 $stmt->execute(array($ID_THEME));
 $theme = $stmt->fetch(); // Access first (and only) result line

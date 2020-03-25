@@ -9,5 +9,5 @@ $stmt = getDb()->prepare("delete from question where ID_QUEST=?");
 $stmt->execute(array($ID_QUEST));
 
 
-redirect('PageChoix.php');
+redirect("SelectionTheme.php");
 ?>

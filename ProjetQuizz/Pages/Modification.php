@@ -12,19 +12,25 @@ $id = $_GET['id'];
 if($table=='UTILISATEUR')
 {
     $primKey='PSEUDO';
+    $origine="Profil.php";
 }
-elseif($table=='THEME')
+else
 {
-    $primKey='ID_THEME';
+    $origine="SelectionTheme.php";
+    if($table=='THEME')
+    {
+        $primKey='ID_THEME';
+    }
+    elseif($table=='QUESTION')
+    {
+        $primKey='ID_QUEST';
+    }
+    elseif($table=='REPONSE')
+    {
+        $primKey='ID_REPONSE';
+    }
 }
-elseif($table=='QUESTION')
-{
-    $primKey='ID_QUEST';
-}
-elseif($table=='REPONSE')
-{
-    $primKey='ID_REPONSE';
-}
+
 
 $stmt = getDb()->query("select * from `" . $table . "` where `" . $primKey. "`='$id'"); 
 $stmt->execute();
@@ -49,7 +55,7 @@ $infoBDD=$stmt->fetch();
                         {
                             $_SESSION['login'] = $_POST['newInfo'];
                         }
-                        redirect("{$_SERVER['HTTP_REFERER']}");
+                        redirect($origine);
                     }
                     else
                     {?>
