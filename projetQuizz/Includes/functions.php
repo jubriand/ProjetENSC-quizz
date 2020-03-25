@@ -112,6 +112,12 @@ function AddSupp($element, $ID_QUEST='')
     </div>
 <?php }
 
+function microtime_float()
+{
+  list($usec, $sec) = explode(" ", microtime());
+  return ((float)$sec);
+}
+
 function TypeQuestion($id)
 {
 

@@ -9,7 +9,7 @@ $stmt = getDb()->prepare('select * from theme where ID_THEME=?');
 $stmt->execute(array($ID_THEME));
 $theme = $stmt->fetch();
 
-$score=$_SESSION['score']*$_SESSION['diff'];
+$score=$_SESSION['score']*2*$_SESSION['diff'];
 
 if(isset($_SESSION['login']))
 {
@@ -27,6 +27,16 @@ if(isset($_SESSION['login']))
 }
 $ratio=$_SESSION['score']/$theme['NB_QUESTIONS'];
 
+$time_start=$_SESSION['time_start'];
+$time_stop=$_SESSION['time_stop'];
+$time_check = microtime_float() - $time_start;
+$time_left= $time_stop-$time_check;
+
+if($time_left>=0 and $score!=0)
+{
+    $score+=$time_left;
+}
+
 ?>
 
 <html>
@@ -35,13 +45,21 @@ $ratio=$_SESSION['score']/$theme['NB_QUESTIONS'];
 		<div class="container-fluid">
             <br/>
 			<div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
-				<h3>Score: <?=$_SESSION['score']?>/<?=$theme['NB_QUESTIONS']?>
+				<h3><?php if($time_left<=0)
+                { ?>
+                    Temps écoulé!!<br/><br/><br/>
+                <?php } 
+                else 
+                { ?>
+                    Le quizz a été fini en <?=$time_check?> secondes<br/><br/><br/>
+                <?php } ?>
+                Score: <?=$_SESSION['score']?>/<?=$theme['NB_QUESTIONS']?>
                 <br/><?=$score?> points</h3>
                 <?php if($theme['BEST_SCORE']<$score)
                 {
                     $stmt = getDb()->prepare('update theme set BEST_SCORE=? where ID_THEME=?');
                     $stmt->execute(array($score,$ID_THEME));
-                    ?><h4>Meilleur Score!!</h4>
+                    ?><br/><h4>Meilleur Score!!</h4>
                 <?php } ?>
                 
                 <br/><br/>

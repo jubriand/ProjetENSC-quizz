@@ -17,14 +17,25 @@
 		$_SESSION['diff']=$difficulte;
 		$_SESSION['score']=0;
 		$_SESSION['questionsPassees']=array();
+
+		$time_start = microtime_float();
+		$_SESSION['time_start']=$time_start;
+
+		$time_stop = $theme['NB_QUESTIONS']*5 - 2*$difficulte;
+		$_SESSION['time_stop']=$time_stop;
 	}
 	else
 	{
 		$difficulte=$_SESSION['diff'];
+		$time_start=$_SESSION['time_start'];
+		$time_stop=$_SESSION['time_stop'];
 	}
 
+	$time_check = microtime_float() - $time_start;
+	$time_left= $time_stop-$time_check;
 	//On regarde si la partie est finie
-	if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'])
+	if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'] 
+	or $time_left<=0)
 	{
 		redirect("PartieQuizzResult.php");
 	}
@@ -125,6 +136,7 @@
 			?>
 			<br/>
 			<div class="jumbotron">
+				<h3 class="text-center"> <?=$time_left?> secondes restantes</h3><br/>
 				<?php if($question['MEDIA']!=null)
 				{?>
 					<div class="row">
