@@ -36,12 +36,7 @@ if (!empty($_POST['NOM_THEME']) and !empty($_POST['NB_QUESTIONS']) and !empty($_
                     <div class="form_group">
                         <label for="NB_QUESTIONS">Rentrez le nombre de questions affichés lors d'une partie: </label>
                         <input type="text" name="NB_QUESTIONS" size ="5" value="10"/> <br/>
-                    </div>
-                    <div class="form-group">
-                        <label for="TIMER_MIN">Rentrez le temps d'une partie: </label>
-                        <input type="text" name="TIMER_MIN" size ="5"/> minutes et 
-                        <input type="text" name="TIMER_SEC" size ="5"/> secondes<br/><br/>
-                    </div>
+                    </div><br/>
                     <div class="form_group">
                         <textarea name="DESC_THEME" rows="3" cols="100" placeholder="Rentrez une description du thème"></textarea><br/><br/>
                     </div>

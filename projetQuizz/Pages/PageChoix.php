@@ -24,6 +24,10 @@ if(isset($_SESSION['ID_THEME']))
 {
 	unset($_SESSION['ID_THEME']);
 }
+if(isset($_SESSION['new_theme']))
+{
+	unset($_SESSION['new_theme']);
+}
 
 // Recuperer tous les themes
 $themes = getDb()->query('select * from theme order by ID_THEME'); 

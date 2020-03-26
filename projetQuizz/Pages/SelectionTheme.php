@@ -34,7 +34,6 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                     <div class="col-md-7 col-sm-5">
                         <h2 class= "text-center"><?= $theme['NOM_THEME'] ?></h2><br/>
                         <p>Nombre de questions: <?= $theme['NB_QUESTIONS'] ?> <?php if($_SESSION['mode']=="admin"){AddModif("NB_QUESTIONS","THEME",$ID_THEME);}?></p>
-                        <p>Temps imparti: <?= $theme['TIMER']/60 ?> minutes et <?= $theme['TIMER']%60 ?> secondes <?php if($_SESSION['mode']=="admin"){AddModif("TIMER","THEME",$ID_THEME);}?></p>
                         <p><small><?= $theme['DESC_THEME'] ?></small><?php if($_SESSION['mode']=="admin"){AddModif("DESC_THEME","THEME",$ID_THEME);}?></p>
 
                         <?php if($_SESSION['mode']=="joueur")
