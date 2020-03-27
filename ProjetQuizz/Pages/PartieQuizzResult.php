@@ -9,11 +9,26 @@ $stmt = getDb()->prepare('select * from theme where ID_THEME=?');
 $stmt->execute(array($ID_THEME));
 $theme = $stmt->fetch();
 
-$score=$_SESSION['score']*2*$_SESSION['diff'];
+$difficulte=$_SESSION['diff'];
+$nbQuestionsJustes=$_SESSION['score'];
+
+$ratio=$nbQuestionsJustes/$theme['NB_QUESTIONS'];
+
+$score=$nbQuestionsJustes*2*$difficulte;
+
+$time_stop=$_SESSION['time_stop'];
+$time_left=TimeLeft();
+
+
+if($time_left>=0 and $score!=0)
+{
+    $score+=$time_left;
+}
+
 
 if(isset($_SESSION['login']))
 {
-    //On met à jour le score de l'utilisateur
+    //On met à jour le score total de l'utilisateur
     $login = $_SESSION['login'];
     $stmt = getDb()->prepare('select SCORE_TOTAL from utilisateur where PSEUDO=?');
     $stmt->execute(array($login));
@@ -25,41 +40,30 @@ if(isset($_SESSION['login']))
     $stmt = getDb()->prepare('update utilisateur set SCORE_TOTAL=? where PSEUDO=?');
     $stmt->execute(array($score_total,$login));
 }
-$ratio=$_SESSION['score']/$theme['NB_QUESTIONS'];
-
-$time_start=$_SESSION['time_start'];
-$time_stop=$_SESSION['time_stop'];
-$time_check = microtime_float() - $time_start;
-$time_left= $time_stop-$time_check;
-
-if($time_left>=0 and $score!=0)
-{
-    $score+=$time_left;
-}
-
 ?>
 
 <html>
 	<body>
 		<?php require_once "../Includes/header.php"; ?>
-		<div class="container-fluid">
+		<div class="container-fluid jumb">
             <br/>
 			<div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
 				<h3><?php if($time_left<=0)
                 { ?>
-                    Temps écoulé!!<br/><br/><br/>
+                    <span class="timer">Temps écoulé!!</span><br/><br/><br/>
                 <?php } 
                 else 
                 { ?>
-                    Le quizz a été fini en <?=$time_check?> secondes<br/><br/><br/>
+                    <span class="dispTime"> Le quizz a été fini en <?php print($time_stop-$time_left);?> secondes</span><br/><br/><br/>
                 <?php } ?>
-                Score: <?=$_SESSION['score']?>/<?=$theme['NB_QUESTIONS']?>
-                <br/><?=$score?> points</h3>
+                <span: class="score">Score: <?=$nbQuestionsJustes?>/<?=$theme['NB_QUESTIONS']?>
+                <br/><?=$score?> points </span></h3>
+
                 <?php if($theme['BEST_SCORE']<$score)
                 {
                     $stmt = getDb()->prepare('update theme set BEST_SCORE=? where ID_THEME=?');
                     $stmt->execute(array($score,$ID_THEME));
-                    ?><br/><h4>Meilleur Score!!</h4>
+                    ?><br/><h4 class="bestScore">Meilleur Score!!</h4>
                 <?php } ?>
                 
                 <br/><br/>
@@ -79,6 +83,12 @@ if($time_left>=0 and $score!=0)
                 { ?>
                     <h5>Bravo, vous avez le Q.I. d'un enfant de CM2!</h5>
                 <?php } ?>
+                <br/>
+                <div class='row'>
+                    <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?diff=<?=$difficulte?>" class="btn btn-primary btn-lg"> Rejouer</a> </p> </div>
+                    <div class="col"> <p class="text-center"> <a href="PageChoix.phph" class="btn btn-secondary btn-lg"> Accueil </a> </p> </div>
+                </div>
+
 			</div>
 		</div>
 

@@ -8,25 +8,10 @@ if(!isset($_SESSION['mode']))//Les personnes non connectés sont obligatoirement
 	$_SESSION['mode']='joueur';
 }
 //On supprime toutes les variables en session 
-if(isset($_SESSION['diff']))
-{
-	unset($_SESSION['diff']);
-}
-if(isset($_SESSION['score']))
-{
-	unset($_SESSION['score']);
-}
-if(isset($_SESSION['questionsPassees']))
-{
-	unset($_SESSION['questionsPassees']);
-}
+RebootSession();
 if(isset($_SESSION['ID_THEME']))
 {
 	unset($_SESSION['ID_THEME']);
-}
-if(isset($_SESSION['new_theme']))
-{
-	unset($_SESSION['new_theme']);
 }
 
 // Recuperer tous les themes
@@ -37,7 +22,7 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 	<body>
 	<?php require_once "../Includes/header.php" ;?>
 		<div class="container-fluid"><br/>
-			<h1 class="text-center"> Themes </h1> <br/><br/>
+			<h1 class="text-center title"> Themes </h1> <br/><br/>
 				<?php 
 				$i=0;
 				foreach ($themes as $theme) 

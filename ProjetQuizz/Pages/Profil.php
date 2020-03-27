@@ -14,8 +14,8 @@ $profil=$stmt->fetch();
 <html>
 	<body>
 	<?php require_once "../Includes/header.php" ;?>
-		<div class="container-fluid">
-            <br/><div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
+		<div class="container-fluid jumb">
+            <div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
             
                 <h1> Profil </h1> <br/><br/>
                 <h4> Pseudo/Login: <?= $profil['PSEUDO'] ?> <?php AddModif("PSEUDO", "UTILISATEUR", $login); ?></h4>

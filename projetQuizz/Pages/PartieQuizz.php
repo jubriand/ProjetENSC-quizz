@@ -11,8 +11,11 @@
 
 
 	//On cherche à savoir si c'est le début de la partie ou non
-	if(!isset($_SESSION['diff']))
+	if(isset($_GET['diff']))
 	{
+		//On supprime toutes les variables en session 
+		RebootSession();
+
 		$difficulte=$_GET['diff'];
 		$_SESSION['diff']=$difficulte;
 		$_SESSION['score']=0;
@@ -21,18 +24,15 @@
 		$time_start = microtime_float();
 		$_SESSION['time_start']=$time_start;
 
-		$time_stop = $theme['NB_QUESTIONS']*5 - 2*$difficulte;
+		$time_stop = $theme['NB_QUESTIONS']*8 - 3*$difficulte;
 		$_SESSION['time_stop']=$time_stop;
 	}
 	else
 	{
 		$difficulte=$_SESSION['diff'];
-		$time_start=$_SESSION['time_start'];
-		$time_stop=$_SESSION['time_stop'];
 	}
 
-	$time_check = microtime_float() - $time_start;
-	$time_left= $time_stop-$time_check;
+	$time_left=TimeLeft();
 	//On regarde si la partie est finie
 	if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'] 
 	or $time_left<=0)
@@ -136,7 +136,7 @@
 			?>
 			<br/>
 			<div class="jumbotron">
-				<h3 class="text-center"> <?=$time_left?> secondes restantes</h3><br/>
+				<h3 class="text-center timer"> <?=$time_left?> secondes restantes</h3><br/>
 				<?php if($question['MEDIA']!=null)
 				{?>
 					<div class="row">
@@ -146,7 +146,7 @@
 				<?php }?>
 
 					<div class="text-center <?php if($question['MEDIA']!=null) { ?> col-md-8 col-sm-6 <?php } ?>">
-						<br/><h4><?=$question['INTITULE']?></h4><br/>
+						<br/><h4 class="intitQuest"><?=$question['INTITULE']?></h4><br/><br/>
 							
 						<?php if ($question["TYPE_QUEST"]==1)
 						{ ?>

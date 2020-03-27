@@ -38,7 +38,7 @@ function formUser($type)
 {?>
     <form method ="POST">
 		
-		<fieldset ><legend class="text-center"> <?php print$type; ?> </legend>
+		<fieldset><legend class="text-center"> <?php print$type; ?> </legend>
 			<br/>
 			<div class="row align-items-center">
 				<div class="m-auto">
@@ -57,9 +57,8 @@ function formUser($type)
 				<?php } ?>
 			</div>
 			
-			
-			<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
 		</fieldset>
+		<br/><p class="text-center"><button type="submit" class="btn btn-primary">Envoyer</button></p><br/>
     </form>
 <?php }
 
@@ -116,6 +115,35 @@ function microtime_float()
 {
   list($usec, $sec) = explode(" ", microtime());
   return ((float)$sec);
+}
+
+function TimeLeft()
+{
+	$time_start=$_SESSION['time_start'];
+	$time_stop=$_SESSION['time_stop'];
+	$time_check = microtime_float() - $time_start;
+	$time_left= $time_stop-$time_check;
+	return $time_left;
+}
+
+function RebootSession()
+{
+if(isset($_SESSION['diff']))
+{
+	unset($_SESSION['diff']);
+}
+if(isset($_SESSION['score']))
+{
+	unset($_SESSION['score']);
+}
+if(isset($_SESSION['questionsPassees']))
+{
+	unset($_SESSION['questionsPassees']);
+}
+if(isset($_SESSION['new_theme']))
+{
+	unset($_SESSION['new_theme']);
+}
 }
 
 function TypeQuestion($id)
