@@ -86,7 +86,7 @@ if(isset($_SESSION['login']))
                 <br/>
                 <div class='row'>
                     <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?diff=<?=$difficulte?>" class="btn btn-primary btn-lg"> Rejouer</a> </p> </div>
-                    <div class="col"> <p class="text-center"> <a href="PageChoix.phph" class="btn btn-secondary btn-lg"> Accueil </a> </p> </div>
+                    <div class="col"> <p class="text-center"> <a href="PageChoix.php" class="btn btn-secondary btn-lg"> Accueil </a> </p> </div>
                 </div>
 
 			</div>
