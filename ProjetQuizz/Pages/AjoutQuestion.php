@@ -56,8 +56,8 @@ if (!empty($_POST['INTITULE']) and !empty($_POST['TYPE_QUEST']))
                             </div>
                             <br/>
                             <div class="form-group col-md-6 col-sm-8">
-                                <label for="MEDIA">Ajoutez une image/video si vous le souhaitez: </label>
-                                <input type="file" class="form-control-file" accept="image/*,video/*" name="MEDIA">
+                                <label for="MEDIA">Ajoutez une image/video si vous le souhaitez: (formats acceptés: .jpg, .png, .gif, .mp4, .avi, .mov)</label>
+                                <input type="file" class="form-control-file" accept=".jpg, .png, .gif, .mp4, .avi, .mov" name="MEDIA">
                             </div>
                         </div>
                         <br/><p class="text-center"><button type="submit" class="btn btn-primary">Ajouter</button></p>

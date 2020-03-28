@@ -22,7 +22,7 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 	<body>
 	<?php require_once "../Includes/header.php" ;?>
 		<div class="container-fluid"><br/>
-			<h1 class="text-center title"> Themes </h1> <br/><br/>
+			<h1 class="text-center"><span class="title">Themes</span> </h1> <br/><br/>
 				<?php 
 				$i=0;
 				foreach ($themes as $theme) 
@@ -37,7 +37,7 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 							print "<div class='row'>";
 						}
 						?>
-						<div class="col"> <p class="text-center"> <a href="SelectionTheme.php?id=<?= $theme['ID_THEME'] ?>" class="btn btn-primary btn-lg"> <?= $theme['NOM_THEME'] ?> </a> </p> </div>
+						<div class="col"> <p class="text-center"> <a href="SelectionTheme.php?id=<?= $theme['ID_THEME'] ?>" class="btn btn-primary btn-lg choiceBtn"> <?= $theme['NOM_THEME'] ?> </a> </p> </div>
 						<?php	
 						$i++;  
 						if($i%3==0)

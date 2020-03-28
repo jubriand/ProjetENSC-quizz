@@ -138,15 +138,28 @@
 			<div class="jumbotron">
 				<h3 class="text-center timer"> <?=$time_left?> secondes restantes</h3><br/>
 				<?php if($question['MEDIA']!=null)
-				{?>
-					<div class="row">
+				{
+					?> <div class="row"> <?php
+					if(substr($question['MEDIA'],-3)=="jpg" or substr($question['MEDIA'],-3)=="png"
+					or substr($question['MEDIA'],-3)=="gif")
+					{?>
 						<div class="col-md-4 col-sm-6">
 							<img class="img-fluid" src="../Images/<?= $question['MEDIA'] ?>" title="<?= $question['MEDIA'] ?>" />
 						</div>
-				<?php }?>
+					<?php }
+					else if(substr($question['MEDIA'],-3)=="avi" or substr($question['MEDIA'],-3)=="mp4"
+					or substr($question['MEDIA'],-3)=="mov")
+					{ ?>
+						<div class="col-md-4 col-sm-6">
+							<div class="embed-responsive embed-responsive-16by9">
+								<iframe src="../Images/<?= $question['MEDIA'] ?>" title="<?= $question['MEDIA'] ?>"></iframe>
+							</div>
+						</div>
+					<?php }
+				} ?>
 
 					<div class="text-center <?php if($question['MEDIA']!=null) { ?> col-md-8 col-sm-6 <?php } ?>">
-						<br/><h4 class="intitQuest"><?=$question['INTITULE']?></h4><br/><br/>
+						<br/><h4 class="intitQuest mx-sm-2 mx-md-5"><?=$question['INTITULE']?></h4><br/><br/>
 							
 						<?php if ($question["TYPE_QUEST"]==1)
 						{ ?>
@@ -175,11 +188,11 @@
 									}
 									if($question["TYPE_QUEST"]==2)
 									{ ?>
-										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $positions[$i]['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg"> <?= $positions[$i]['INTITULE'] ?> </a> </p> </div>
+										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $positions[$i]['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg choiceBtn"> <?= $positions[$i]['INTITULE'] ?> </a> </p> </div>
 									<?php }
 									else 
 									{ ?>
-										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $reponse['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg"> <?= $reponse['INTITULE'] ?> </a> </p> </div>
+										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $reponse['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg choiceBtn"> <?= $reponse['INTITULE'] ?> </a> </p> </div>
 									<?php }
 									$i++;  
 									if($i%3==0)
