@@ -64,15 +64,15 @@ function formUser($type)
 
 function RecupNewId($table)
 {
-	if($table=='THEME')
+	if($table=='theme')
 	{
 		$id='ID_THEME';
 	}
-	else if($table=='QUESTION')
+	else if($table=='question')
 	{
 		$id='ID_QUEST';
 	}
-	else if($table=='REPONSE')
+	else if($table=='reponse')
 	{
 		$id='ID_REPONSE';
 	}
