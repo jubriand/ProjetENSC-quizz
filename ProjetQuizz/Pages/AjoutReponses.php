@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../Includes/head.php";
 require_once "../Includes/functions.php";
-session_start();
 $ID_QUEST = $_GET['id'];
 $nbReponses = $_GET['nbRep'];
 

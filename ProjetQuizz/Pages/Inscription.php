@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../Includes/head.php";
 require_once "../Includes/functions.php";
-session_start();
 
 if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
     $login = $_POST['login'];

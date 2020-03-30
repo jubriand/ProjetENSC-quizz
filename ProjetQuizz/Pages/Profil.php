@@ -1,6 +1,6 @@
 <?php
-require_once "../Includes/functions.php";
 session_start();
+require_once "../Includes/functions.php";
 require_once "../Includes/head.php"; 
 
 

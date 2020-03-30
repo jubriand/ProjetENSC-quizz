@@ -1,6 +1,6 @@
 <?php
-require_once "../Includes/functions.php";
 session_start();
+require_once "../Includes/functions.php";
 $ID_THEME=$_SESSION['ID_THEME'];
 
 $stmt = getDb()->prepare("select * from question where ID_THEME=?");

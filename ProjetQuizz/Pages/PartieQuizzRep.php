@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once "../Includes/functions.php";
 require_once "../Includes/head.php"; 
-session_start();
+
 
 $id=$_GET['id'];
 $typeQuest=$_GET['typeQuest'];

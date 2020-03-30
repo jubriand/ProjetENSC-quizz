@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../Includes/head.php";
 require_once "../Includes/functions.php";
-session_start();
 
 if (!empty($_POST['NOM_THEME']) and !empty($_POST['NB_QUESTIONS']) and !empty($_POST['TIMER_MIN']) and !empty($_POST['DESC_THEME'])) 
 {

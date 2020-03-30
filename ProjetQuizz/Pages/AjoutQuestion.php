@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../Includes/head.php";
 require_once "../Includes/functions.php";
-session_start();
 $ID_THEME = $_SESSION['ID_THEME'];
 
 if (!empty($_POST['INTITULE']) and !empty($_POST['TYPE_QUEST'])) 

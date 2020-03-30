@@ -1,6 +1,6 @@
 <?php
-require_once "../Includes/functions.php";
 session_start();
+require_once "../Includes/functions.php";
 $ID_QUEST=$_GET['id'];
 
 $stmt = getDb()->prepare("delete from reponse where ID_QUEST=?");

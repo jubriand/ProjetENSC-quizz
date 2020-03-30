@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../Includes/functions.php";
 require_once "../Includes/head.php";
-session_start();
 
 if(!isset($_SESSION['ID_THEME']))
 {
