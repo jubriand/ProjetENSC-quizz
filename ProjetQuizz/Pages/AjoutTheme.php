@@ -12,7 +12,7 @@ if (!empty($_POST['NOM_THEME']) and !empty($_POST['NB_QUESTIONS']) and !empty($_
     $DESC_THEME=$_POST['DESC_THEME'];
     $MEDIA=$_POST['MEDIA'];
 
-    $new_id=RecupNewId('THEME');
+    $new_id=RecupNewId('theme');
 
     $stmt = getDb()->prepare("insert into theme values('$new_id', '$NOM_THEME', '$NB_QUESTIONS', '$TIMER','$DESC_THEME', '$MEDIA', 0)");
     $stmt->execute();

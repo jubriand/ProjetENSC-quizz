@@ -10,7 +10,7 @@ if (!empty($_POST['INTITULE']) and !empty($_POST['TYPE_QUEST']))
     $intitule=$_POST['INTITULE'];
     $type_quest=$_POST['TYPE_QUEST'];
     $media=$_POST['MEDIA'];
-    $new_id=RecupNewId('QUESTION');
+    $new_id=RecupNewId('question');
 
     $stmt = getDb()->prepare("insert into question values('$new_id', '$intitule', '$type_quest', '$media', '$ID_THEME')");
     $stmt->execute();
