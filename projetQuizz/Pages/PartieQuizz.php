@@ -1,4 +1,5 @@
 <?php
+	ob_start();
 	session_start();
 	require_once "../Includes/functions.php";
 	require_once "../Includes/head.php"; 
