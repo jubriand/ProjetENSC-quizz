@@ -10,7 +10,7 @@ $table = $_GET['table'];
 $id = $_GET['id'];
 
 // Préparer la récupération de la BDD
-if($table=='UTILISATEUR')
+if($table=='utilisateur')
 {
     $primKey='PSEUDO';
     $origine="Profil.php";
@@ -18,15 +18,15 @@ if($table=='UTILISATEUR')
 else
 {
     $origine="SelectionTheme.php";
-    if($table=='THEME')
+    if($table=='theme')
     {
         $primKey='ID_THEME';
     }
-    elseif($table=='QUESTION')
+    elseif($table=='question')
     {
         $primKey='ID_QUEST';
     }
-    elseif($table=='REPONSE')
+    elseif($table=='reponse')
     {
         $primKey='ID_REPONSE';
     }

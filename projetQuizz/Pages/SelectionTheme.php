@@ -34,8 +34,8 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                     <div class="col-md-7 col-sm-6">
                         <br/>
                         <h2 class= "text-center"><span class="title"><?= $theme['NOM_THEME'] ?></span></h2><br/>
-                        <p>Nombre de questions: <?= $theme['NB_QUESTIONS'] ?> <?php if($_SESSION['mode']=="admin"){AddModif("NB_QUESTIONS","THEME",$ID_THEME);}?></p>
-                        <p><small><?= $theme['DESC_THEME'] ?></small><?php if($_SESSION['mode']=="admin"){AddModif("DESC_THEME","THEME",$ID_THEME);}?></p>
+                        <p>Nombre de questions: <?= $theme['NB_QUESTIONS'] ?> <?php if($_SESSION['mode']=="admin"){AddModif("NB_QUESTIONS","theme",$ID_THEME);}?></p>
+                        <p><small><?= $theme['DESC_THEME'] ?></small><?php if($_SESSION['mode']=="admin"){AddModif("DESC_THEME","theme",$ID_THEME);}?></p>
 
                         <?php if($_SESSION['mode']=="joueur")
                         {?>
@@ -71,7 +71,7 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                         <hr/>
                         <div class='text-right'><?php AddSupp('Question', $question['ID_QUEST']);?></div>
                         <h4>Question n°<?= $i?>: </h4> 
-                        <p>Intitulé: <?= $question['INTITULE'] ?> <?php AddModif("INTITULE","QUESTION",$question['ID_QUEST']);?></p>
+                        <p>Intitulé: <?= $question['INTITULE'] ?> <?php AddModif("INTITULE","question",$question['ID_QUEST']);?></p>
                         <p>Type de Question: 
                         <?php if($question['TYPE_QUEST']==0)
                         {
@@ -99,7 +99,7 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                             {?>
                                 <div class="alert alert-danger" role="alert">
                             <?php } 
-                                print ''. $reponse['INTITULE']; AddModif("INTITULE","REPONSE",$reponse['ID_REPONSE']);?>
+                                print ''. $reponse['INTITULE']; AddModif("INTITULE","reponse",$reponse['ID_REPONSE']);?>
                             </div>
                         <?php }
                         $i++;

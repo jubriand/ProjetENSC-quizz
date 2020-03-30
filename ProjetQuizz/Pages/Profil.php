@@ -18,8 +18,8 @@ $profil=$stmt->fetch();
             <div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
             
                 <h1> Profil </h1> <br/><br/>
-                <h4> Pseudo/Login: <?= $profil['PSEUDO'] ?> <?php AddModif("PSEUDO", "UTILISATEUR", $login); ?></h4>
-                <h4> Mot de passe: <?= $profil['MDP'] ?> <?php AddModif("MDP", "UTILISATEUR", $login); ?> </h4>
+                <h4> Pseudo/Login: <?= $profil['PSEUDO'] ?> <?php AddModif("PSEUDO", "utilisateur", $login); ?></h4>
+                <h4> Mot de passe: <?= $profil['MDP'] ?> <?php AddModif("MDP", "utilisateur", $login); ?> </h4>
                 <h4> Administrateur: <?php if($profil['IS_ADMIN']==0){ print'OUI'; } else{ print'NON'; } ?></h4><br/>
                 <h3> Score total: <?= $profil['SCORE_TOTAL'] ?></h4>
 
