@@ -8,7 +8,7 @@ $nbReponses = $_GET['nbRep'];
 
 if (!empty($_POST['INTITULE1'])) 
 {
-    $new_id=RecupNewId('REPONSE');
+    $new_id=RecupNewId('reponse');
     
     for($i=1; $i<=$nbReponses; $i++)
     {
@@ -76,6 +76,7 @@ if (!empty($_POST['INTITULE1']))
                     </div>
                 </fieldset>
             </form>
+            <br/><br/>
         </div>
         <?php require_once "../Includes/scripts.php"; ?> 
         <?php require_once "../Includes/footer.php"; ?> 

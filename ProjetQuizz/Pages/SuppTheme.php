@@ -17,5 +17,5 @@ foreach($stmt as $question)
 $stmt = getDb()->prepare("delete from theme where ID_THEME=?");
 $stmt->execute(array($ID_THEME));
 
-redirect("SelectionTheme.php");
+redirect("PageChoix.php");
 ?>

@@ -111,6 +111,41 @@ function AddSupp($element, $ID_QUEST='')
     </div>
 <?php }
 
+function AddMedia()
+{
+	$target_dir = "../Images/";
+	$target_file = $target_dir . basename($_FILES["MEDIA"]["name"]);
+	$uploadOk = 1;
+	
+	// On vérifie que le fichier n'existe pas déjà
+	if (file_exists($target_file)) 
+	{
+		$message="Le fichier que vous essayez d'ajouter existe déjà";
+		$uploadOk = 0;
+	}
+	// On vérifie la taille dufichier
+	if ($_FILES["MEDIA"]["size"] > 500000) 
+	{
+		$message="Le fichier que vous essayez d'ajouter est trop lourd";
+		$uploadOk = 0;
+	}
+
+	// On regarde si le fichier peut être ajouté et si oui on l'ajoute
+	if ($uploadOk == 1) 
+	{
+		if (move_uploaded_file($_FILES["MEDIA"]["tmp_name"], $target_file)) 
+		{
+			$message="Ok";
+		} 
+		else 
+		{
+			$message="Il y a eu une erreur lors de l'ajout de votre fichier.";
+		}
+	}
+	return $message;
+}
+
+
 function microtime_float()
 {
   list($usec, $sec) = explode(" ", microtime());
