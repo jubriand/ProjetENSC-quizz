@@ -33,9 +33,9 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                     <?php } ?>
                     <div class="col-md-7 col-sm-6">
                         <br/>
-                        <h2 class= "text-center"><span class="title"><?= $theme['NOM_THEME'] ?></span></h2><br/>
-                        <p>Nombre de questions: <?= $theme['NB_QUESTIONS'] ?> <?php if($_SESSION['mode']=="admin"){AddModif("NB_QUESTIONS","theme",$ID_THEME);}?></p>
-                        <p><small><?= $theme['DESC_THEME'] ?></small><?php if($_SESSION['mode']=="admin"){AddModif("DESC_THEME","theme",$ID_THEME);}?></p>
+                        <h2 class= "text-center"><span class="title"><?= $theme['NOM_THEME'] ?></span></h2><br/><br/>
+                        <p><span class="font-weight-bold">Nombre de questions:</span> <?= $theme['NB_QUESTIONS'] ?> <?php if($_SESSION['mode']=="admin"){AddModif("NB_QUESTIONS","theme",$ID_THEME);}?></p>
+                        <p><?= $theme['DESC_THEME'] ?><?php if($_SESSION['mode']=="admin"){AddModif("DESC_THEME","theme",$ID_THEME);}?></p>
 
                         <?php if($_SESSION['mode']=="joueur")
                         {?>
@@ -69,8 +69,10 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                     foreach($questions as $question)
                     {?>
                         <hr/>
-                        <div class='text-right'><?php AddSupp('Question', $question['ID_QUEST']);?></div>
+                        <div class='float-right'><?php AddSupp('Question', $question['ID_QUEST']);?></div>
+                        
                         <h4>Question n°<?= $i?>: </h4> 
+
                         <p>Intitulé: <?= $question['INTITULE'] ?> <?php AddModif("INTITULE","question",$question['ID_QUEST']);?></p>
                         <p>Type de Question: 
                         <?php if($question['TYPE_QUEST']==0)

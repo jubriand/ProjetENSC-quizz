@@ -5,8 +5,8 @@ require_once "../Includes/head.php";
 require_once "../Includes/functions.php";
 
 if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
-    $login = $_POST['login'];
-    $mdp = $_POST['mdp'];
+    $login = escape($_POST['login']);
+    $mdp = escape($_POST['mdp']);
     $is_admin=$_POST['admin'];
     if ($is_admin=='on')
     {

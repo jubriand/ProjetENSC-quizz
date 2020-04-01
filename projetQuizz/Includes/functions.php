@@ -14,11 +14,13 @@ function getDb() {
 }
 
 // Check if a user is connected
-function isUserConnected() {
+function isUserConnected() 
+{
     return isset($_SESSION['login']);
 }
 
-function isAdmin(){
+function isAdmin()
+{
     $stmt = getDb()->prepare('select * from utilisateur where PSEUDO=?');
     $stmt->execute(array($_SESSION['login']));
     $is_admin = $stmt->fetch();
@@ -29,37 +31,48 @@ function isAdmin(){
 function redirect($url) {
     header("Location: $url");
 }
+
+// Escape a value to prevent XSS attacks
+function escape($value) {
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+}
+
 function AddModif($modif, $table, $id)
 {?>
 	<a class="btn btn-secondary navbar-btn" type="button" href="Modification.php?modif=<?=$modif?>&table=<?=$table?>&id=<?=$id?>"><img src="../Icons/svg/pencil.svg" alt="pencil"> Modifier</a>
 <?php }
 
 function formUser($type)
-{?>
-    <form method ="POST">
+{?>	
+<div class="container">
+    <br/><div class="jumbotron">
+		<form method ="POST">
 		
-		<fieldset><legend class="text-center"> <?php print$type; ?> </legend>
-			<br/>
-			<div class="row align-items-center">
-				<div class="m-auto">
-					<label for ="login"> Login : </label>
-					<input type="text" name="login" size ="17"/> <br/>
-				</div>
-				<div class="m-auto">
-					<label for ="mdp"> Mot de passe : </label>
-					<input type="password" name="mdp" size="17"/>
-				</div>
-				<?php if($type=='Inscription'){?>
+			<fieldset><legend class="text-center"> <h3> <span class="title"><?php print$type; ?></span></h3> </legend>
+				<br/>
+				<br/>
+				<div class="row align-items-center">
 					<div class="m-auto">
-					<label for ="mdp"> Cochez cette case pour être administrateur: </label>
-					<input type="radio" name="admin"/>
+						<label for ="login"> Login : </label>
+						<input type="text" name="login" size ="17"/> <br/>
 					</div>
-				<?php } ?>
-			</div>
-			
-		</fieldset>
-		<br/><p class="text-center"><button type="submit" class="btn btn-primary">Envoyer</button></p><br/>
-    </form>
+					<div class="m-auto">
+						<label for ="mdp"> Mot de passe : </label>
+						<input type="password" name="mdp" size="17"/>
+					</div>
+					<?php if($type=='Inscription'){?>
+						<div class="m-auto">
+						<label for ="mdp"> Cochez cette case pour être administrateur: </label>
+						<input type="radio" name="admin"/>
+						</div>
+					<?php } ?>
+				</div>
+				
+			</fieldset>
+			<br/><p class="text-center"><button type="submit" class="btn btn-primary">Envoyer</button></p><br/>
+		</form>
+	</div>
+</div>
 <?php }
 
 function RecupNewId($table)

@@ -12,7 +12,7 @@ if (!empty($_POST['INTITULE1']))
     
     for($i=1; $i<=$nbReponses; $i++)
     {
-        $intitule=$_POST['INTITULE'.$i];
+        $intitule=escape($_POST['INTITULE'.$i]);
         $is_true=$_POST['IS_TRUE'.$i];
         $stmt = getDb()->prepare("insert into reponse values('$new_id', '$intitule', '$is_true', '$ID_QUEST')");
         $stmt->execute();
@@ -36,7 +36,7 @@ if (!empty($_POST['INTITULE1']))
 	<body>
         <div class="container-fluid"> <br/>
             <form method ="POST">   
-                <fieldset><legend class="text-center"> <h3>Ajout d'une question</h3></legend>
+                <fieldset><legend class="text-center"> <h3><span class="title">Ajout d'une question</span></h3></legend>
                     <div class="text-center">
                         <hr/>
                         <h5>Réponses</h5>

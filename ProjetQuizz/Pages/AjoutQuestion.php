@@ -29,9 +29,9 @@ $ID_THEME = $_SESSION['ID_THEME'];
 
                 if(empty($_FILES['MEDIA']['name']) or $message=="Ok")
                 {
-                    $intitule=$_POST['INTITULE'];
+                    $intitule=escape($_POST['INTITULE']);
                     $type_quest=$_POST['TYPE_QUEST'];
-                    $media=$_FILES['MEDIA']['name'];
+                    $media=escape($_FILES['MEDIA']['name']);
 
                     $new_id=RecupNewId('question');
 
@@ -55,7 +55,7 @@ $ID_THEME = $_SESSION['ID_THEME'];
             } ?>
 
             <form method ="POST" enctype="multipart/form-data">   
-                <fieldset><legend class="text-center"> <h3>Ajout d'une question</h3></legend>
+                <fieldset><legend class="text-center"> <h3> <span class="title">Ajout d'une question</span></h3></legend>
                     <hr/>
                     <h5 class="text-center">Question</h5>
                     <hr/>

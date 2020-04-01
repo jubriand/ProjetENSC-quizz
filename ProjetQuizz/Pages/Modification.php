@@ -50,8 +50,9 @@ $infoBDD=$stmt->fetch();
                 {
                     if($_POST['newInfo']==$_POST['confirmInfo'])
                     {
+                        $newInfo=escape($_POST['newInfo']);
                         $stmt = getDb()->prepare("update `" . $table . "` set `" . $modif . "`=? where `" . $primKey. "`=?");
-                        $stmt->execute(array($_POST['newInfo'], $id));
+                        $stmt->execute(array($newInfo, $id));
                         if($modif=='PSEUDO')
                         {
                             $_SESSION['login'] = $_POST['newInfo'];
@@ -77,7 +78,7 @@ $infoBDD=$stmt->fetch();
             } ?>
             <form method ="POST">
             
-            <fieldset ><legend class="text-center"> <h3> Modification d'un élément</h3> </legend>
+            <fieldset ><legend class="text-center"> <h3> <span class="title">Modification d'un élément </span></h3> </legend>
             <br/>
             <div class=text-center>
                 <label for ="pastInfo"> Rentrez l'ancien élément: </label>

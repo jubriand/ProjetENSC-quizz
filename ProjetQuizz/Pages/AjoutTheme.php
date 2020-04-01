@@ -24,10 +24,10 @@ require_once "../Includes/functions.php";
                     <?php }
                     else
                     {
-                        $NOM_THEME=$_POST['NOM_THEME'];
-                        $NB_QUESTIONS=$_POST['NB_QUESTIONS'];
-                        $DESC_THEME=$_POST['DESC_THEME'];
-                        $MEDIA=$_FILES['MEDIA']["name"];
+                        $NOM_THEME=escape($_POST['NOM_THEME']);
+                        $NB_QUESTIONS=escape($_POST['NB_QUESTIONS']);
+                        $DESC_THEME=escape($_POST['DESC_THEME']);
+                        $MEDIA=escape($_FILES['MEDIA']["name"]);
     
                         $new_id=RecupNewId('theme');
     
@@ -42,7 +42,7 @@ require_once "../Includes/functions.php";
             } ?>
 
             <form method ="POST" enctype="multipart/form-data">   
-                <fieldset ><legend class="text-center"> <h3>Ajout d'un thème</h3></legend>
+                <fieldset ><legend class="text-center"> <h3><span class="title">Ajout d'un thème</span></h3></legend>
                     <br/>
                     <div class="form-group">
                         <label for ="NOM_THEME"> Rentrez le nom du thème: </label>
