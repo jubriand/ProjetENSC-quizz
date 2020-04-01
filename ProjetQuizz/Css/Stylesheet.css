@@ -1,4 +1,5 @@
-html {
+html 
+{
     position: relative;
     min-height: 100%;
 }
@@ -10,14 +11,18 @@ html {
     bottom: 0;
     width: 100%;
     height: 40px;
-    border-top: 1px solid #ccc;
     padding-top: 10px;
     padding-bottom: 20px;
+}
+.navbar
+{
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 body
 {
-    background: linear-gradient(rgb(23, 81, 189),#8cf3d4d3);
+    background: linear-gradient(#011c44,rgb(8, 84, 172),#011c44);
 }
 
 .jumb
@@ -74,12 +79,13 @@ body
 
 .btn-primary
 {
-    background: rgb(149, 44, 209);
+    background: rgb(132, 20, 197);
     border-color: rgb(125, 6, 194);
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .open>.dropdown-toggle.btn-primary 
 {
-    background-color: rgb(115, 36, 161) !important;
+    background-color: rgb(97, 19, 143) !important;
+    border-color: rgb(125, 6, 194)!important;
 }
 
 .choiceBtn 

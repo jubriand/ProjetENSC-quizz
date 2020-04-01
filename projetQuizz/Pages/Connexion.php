@@ -15,16 +15,9 @@ if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
         $_SESSION['mode']="joueur";
         redirect("PageChoix.php");
     }
-    else {
+    else 
+    {
         $error = "Utilisateur non reconnu";
     }
 }
 ?>
-
-<html lang="fr">
-	<body>
-        <?php formUser('Connexion'); ?> 
-        <?php require_once "../Includes/scripts.php"; ?> 
-        <?php require_once "../Includes/footer.php"; ?> 
-	</body>
-</html>

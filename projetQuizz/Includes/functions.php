@@ -52,16 +52,16 @@ function formUser($type)
 				<br/>
 				<br/>
 				<div class="row align-items-center">
-					<div class="m-auto">
+					<div class="form-group">
 						<label for ="login"> Login : </label>
 						<input type="text" name="login" size ="17"/> <br/>
 					</div>
-					<div class="m-auto">
+					<div class="form-group">
 						<label for ="mdp"> Mot de passe : </label>
 						<input type="password" name="mdp" size="17"/>
 					</div>
 					<?php if($type=='Inscription'){?>
-						<div class="m-auto">
+						<div class="form-group">
 						<label for ="mdp"> Cochez cette case pour être administrateur: </label>
 						<input type="radio" name="admin"/>
 						</div>
@@ -100,14 +100,14 @@ function AddSupp($element, $ID_QUEST='')
 {?>
 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Supp<?=$element?><?=$ID_QUEST?>">
     	<h6>Supprimer</h6>
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="Supp<?=$element?><?=$ID_QUEST?>" tabindex="-1" role="dialog" aria-labelledby="Supp<?=$element?><?=$ID_QUEST?>Label" aria-hidden="true">
+	</button>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="Supp<?=$element?><?=$ID_QUEST?>" tabindex="-1" role="dialog" aria-labelledby="Supp<?=$element?><?=$ID_QUEST?>Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="Supp<?=$element?><?=$ID_QUEST?>Label"><img src="../Icons/svg/warning.svg" alt="warning"> Attention!</h5>
+                    <h5 class="modal-title" id="Supp<<?=$element?><?=$ID_QUEST?>Label"><img src="../Icons/svg/warning.svg" alt="warning"> Attention!</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         	            <span aria-hidden="true">&times;</span>
                     </button>
@@ -119,6 +119,46 @@ function AddSupp($element, $ID_QUEST='')
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
                     <a type="button" class="btn btn-primary" href="Supp<?=$element?>.php<?php if($element=='Question'){?>?id=<?=$ID_QUEST?> <?php }?>">Oui</a>
                 </div>
+            </div>
+        </div>
+	</div>
+<?php }
+
+function AddIdent($type)
+{?>
+    <!-- Modal -->
+    <div class="modal fade" id="Supp<?=$type?>" tabindex="-1" role="dialog" aria-labelledby="Supp<?=$type?>Label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Supp<?=$type?>Label"><?=$type?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	            <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+					<form method="POST" action="<?=$type?>.php">
+						<div class="form-group">
+							<label for ="login"> Login : </label>
+							<input type="text" name="login" size ="17"/> <br/>
+						</div>
+						<div class="form-group">
+							<label for ="mdp"> Mot de passe : </label>
+							<input type="password" name="mdp" size="17"/>
+						</div>
+						<?php if($type=='Inscription'){?>
+							<div class="form-group">
+								<label for ="mdp"> Cochez cette case pour être administrateur: </label>
+								<input type="radio" name="admin"/>
+							</div>
+						<?php } ?>
+					
+				</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-primary">Confirmer</button>
+						</div>
+					</form>
             </div>
         </div>
     </div>
@@ -227,7 +267,7 @@ function QuestionVraiFaux($ID_QUEST) //question vrai ou faux (TYPE_QUEST=0)
 				<br/>
 				<div align="center">
 					
-					<div class="m-auto">
+					<div class="form-group">
 						<label for ="reponse"> Vrai </label>
 						<input type="radio" name="reponse" value="vrai" size="17"/>
 						<label for ="reponse"> Faux </label>
@@ -253,7 +293,7 @@ function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
 				<fieldset ><legend class="text-center"action="PartieQuizzRep.php"> </legend>
 				<br/>
 				<div class="text-center">
-					<div class="m-auto">
+					<div class="form-group">
 						<input type="text" name="reponse" size ="50"/> <br/>
 					</div>
 					
@@ -277,7 +317,7 @@ function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
 				<br/>
 				<div align="center">
 					
-					<div class="m-auto">
+					<div class="form-group">
 						<label for="rep1"> réponse 1</label>
 						<input type="checkbox" id="rep1" name="rep1" value="1" size="17"/><br/>
 						

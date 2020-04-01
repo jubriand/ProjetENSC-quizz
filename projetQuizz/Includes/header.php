@@ -1,7 +1,7 @@
 <?php require_once "functions.php"; ?>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="PageChoix.php">Page d'accueil</a>
+  <a class="navbar-brand media-heading" href="PageChoix.php"><img width="100px" class="d-inline-block align-top"  src="../Images/logoQuizz.png" title="logo"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -35,8 +35,10 @@
     <?php } 
     else {?>
     <ul class="navbar-nav ml-auto">
-      <a class="btn btn-danger navbar-btn" type="button" href="Connexion.php">Connexion</a> 
-      <a class="btn btn-outline-success" type="button" href="Inscription.php">Inscription</a>
+      <button class="btn btn-danger navbar-btn" type="button" data-toggle="modal" data-target="#SuppConnexion">Connexion</button> 
+      <?php AddIdent("Connexion");?>
+      <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#SuppInscription">Inscription</button>
+      <?php AddIdent("Inscription");?>
     <?php } ?>
 	  </ul>
 
