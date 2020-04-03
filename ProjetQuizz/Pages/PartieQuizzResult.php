@@ -17,14 +17,14 @@ $ratio=$nbQuestionsJustes/$theme['NB_QUESTIONS'];
 
 $score=$nbQuestionsJustes*2*$difficulte;
 
-$time_stop=$_SESSION['time_stop'];
+/*$time_stop=$_SESSION['time_stop'];
 $time_left=TimeLeft();
 
 
 if($time_left>=0 and $score!=0)
 {
     $score+=$time_left;
-}
+}*/
 
 
 if(isset($_SESSION['login']))
@@ -49,14 +49,14 @@ if(isset($_SESSION['login']))
 		<div class="container-fluid jumb">
             <br/>
 			<div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
-				<h3><?php if($time_left<=0)
+				<h3><?php /*if($time_left<=0)
                 { ?>
                     <span class="timer">Temps écoulé!!</span><br/><br/><br/>
                 <?php } 
                 else 
                 { ?>
                     <span class="dispTime"> Le quizz a été fini en <?php print($time_stop-$time_left);?> secondes</span><br/><br/><br/>
-                <?php } ?>
+                <?php } */?>
                 <span: class="score">Score: <?=$nbQuestionsJustes?>/<?=$theme['NB_QUESTIONS']?>
                 <br/><?=$score?> points </span></h3>
 

@@ -25,18 +25,52 @@
 		$time_start = microtime_float();
 		$_SESSION['time_start']=$time_start;
 
-		$time_stop = $theme['NB_QUESTIONS']*8 - 3*$difficulte;
+		$time_stop = (25 - 5*$difficulte)*1000;
 		$_SESSION['time_stop']=$time_stop;
 	}
 	else
 	{
 		$difficulte=$_SESSION['diff'];
-	}
+		$time_stop=$_SESSION['time_stop'];
+	}?>
 
-	$time_left=TimeLeft();
-	//On regarde si la partie est finie
-	if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'] 
-	or $time_left<=0)
+	<script language="JavaScript">
+		function startTimer(duration, display) {
+			var start = Date.now(),
+			diff,
+			seconds,
+			milSeconds;
+			function timer() {
+				// get the number of seconds that have elapsed since 
+				// startTimer() was called
+				diff = duration - ((Date.now() - start) | 0);
+
+				// does the same job as parseInt truncates the float
+				seconds = (diff / 1000) | 0;
+				milSeconds = (diff %1000) | 0;
+
+				seconds = seconds < 10 ? "0" + seconds : seconds;
+				milSeconds = milSeconds < 10 ? "0" + milSeconds : milSeconds;
+
+				display.textContent = seconds + ":" + milSeconds; 
+
+				if (diff < 0) {
+					window.location.href = "PartieQuizzResult.php";
+				}
+			};
+		// we don't want to wait a full second before the timer starts
+		timer();
+		setInterval(timer, 1);
+		}
+		window.onload = function () 
+		{
+			var timeStop = <?=$time_stop?>,
+				display = document.querySelector('#time');
+			startTimer(timeStop, display);
+		};
+	</script>
+
+	<?php if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'])
 	{
 		redirect("PartieQuizzResult.php");
 	}
@@ -137,7 +171,7 @@
 			?>
 			<br/>
 			<div class="jumbotron">
-				<h3 class="text-center timer"> <?=$time_left?> secondes restantes</h3><br/>
+				<h3 class="text-center timer"> <span id="time">00:000</span> secondes restantes!</h3><br/>
 				<?php if($question['MEDIA']!=null)
 				{
 					?> <div class="row"> <?php
