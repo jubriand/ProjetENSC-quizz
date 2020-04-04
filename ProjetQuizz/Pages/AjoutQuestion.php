@@ -12,7 +12,7 @@ $ID_THEME = $_SESSION['ID_THEME'];
         <?php require_once "../Includes/header.php" ;?>
         <div class="container-fluid"> <br/>
             <div class="jumbotron">
-                <?php if (!empty($_POST['INTITULE']) and !empty($_POST['TYPE_QUEST'])) 
+                <?php if (!empty($_POST['INTITULE']) and isset($_POST['TYPE_QUEST']))
                 {
                     if(!empty($_FILES['MEDIA']['name']))
                     {
@@ -68,9 +68,9 @@ $ID_THEME = $_SESSION['ID_THEME'];
                                 <div class="form-group col-md-6 col-sm-8">
                                     <label for="TYPE_QUEST">Rentrez le type de question: </label>
                                     <select class="form-control col-lg-6 col-md-9 col-sm-10" name="TYPE_QUEST">
-                                        <option>Vrai/Faux</option>
-                                        <option value=1>Question Ouverte</option>
-                                        <option value=2>Question à choix multiple</option>
+                                        <option value="0">Vrai/Faux</option>
+                                        <option value="1">Question Ouverte</option>
+                                        <option value="2">Question à choix multiple</option>
                                     </select>
                                 </div>
                                 <br/>

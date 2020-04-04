@@ -34,6 +34,7 @@ if (!empty($_POST['INTITULE1']))
 
 <html lang="fr">
 	<body>
+        <?php require_once "../Includes/header.php" ;?>
         <div class="container-fluid"> <br/>
             <div class="jumbotron">
                 <form method ="POST">   

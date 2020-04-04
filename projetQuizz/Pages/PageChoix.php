@@ -1,12 +1,13 @@
-<script language="JavaScript">
-	localStorage.clear();
-</script>
 <?php
 ob_start();
 session_start();
 require_once "../Includes/functions.php";
 require_once "../Includes/head.php"; 
-
+?>
+<script language="JavaScript">
+	localStorage.clear();
+</script>
+<?php
 if(!isset($_SESSION['mode']))//Les personnes non connectés sont obligatoirement des joueurs
 {
 	$_SESSION['mode']='joueur';
