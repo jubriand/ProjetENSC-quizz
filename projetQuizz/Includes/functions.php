@@ -208,7 +208,7 @@ function microtime_float()
 function TimeLeft()
 {
 	$time_start=$_SESSION['time_start'];
-	$time_stop=$_SESSION['time_stop'];
+	$time_stop=intdiv($_SESSION['time_stop'],1000);
 	$time_check = microtime_float() - $time_start;
 	$time_left= $time_stop-$time_check;
 	return $time_left;

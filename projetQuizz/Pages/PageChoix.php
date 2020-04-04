@@ -1,3 +1,6 @@
+<script language="JavaScript">
+	localStorage.clear();
+</script>
 <?php
 ob_start();
 session_start();

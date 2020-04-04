@@ -25,7 +25,7 @@
 		$time_start = microtime_float();
 		$_SESSION['time_start']=$time_start;
 
-		$time_stop = (25 - 5*$difficulte)*1000;
+		$time_stop = ($theme['NB_QUESTIONS']*8 - 3*$difficulte)*1000;
 		$_SESSION['time_stop']=$time_stop;
 	}
 	else
@@ -44,6 +44,7 @@
 				// get the number of seconds that have elapsed since 
 				// startTimer() was called
 				diff = duration - ((Date.now() - start) | 0);
+				localStorage.setItem("time",diff);
 
 				// does the same job as parseInt truncates the float
 				seconds = (diff / 1000) | 0;
@@ -54,22 +55,30 @@
 
 				display.textContent = seconds + ":" + milSeconds; 
 
-				if (diff < 0) {
+				if (diff <= 0) {
 					window.location.href = "PartieQuizzResult.php";
 				}
 			};
-		// we don't want to wait a full second before the timer starts
-		timer();
-		setInterval(timer, 1);
+			// we don't want to wait a full second before the timer starts
+			timer();
+			setInterval(timer, 1);
 		}
 		window.onload = function () 
 		{
-			var timeStop = <?=$time_stop?>,
+			if (localStorage.getItem("time") == null) 
+            {
+                startCountdown=<?=$time_stop?>;
+                localStorage.setItem("time",startCountdown);
+            }
+            else
+            {
+                startCountdown=localStorage.getItem("time");
+            }
+			var timeStop = startCountdown,
 				display = document.querySelector('#time');
 			startTimer(timeStop, display);
 		};
 	</script>
-
 	<?php if(count($_SESSION['questionsPassees'])==$theme['NB_QUESTIONS'])
 	{
 		redirect("PartieQuizzResult.php");
@@ -171,7 +180,7 @@
 			?>
 			<br/>
 			<div class="jumbotron">
-				<h3 class="text-center timer"> <span id="time">00:000</span> secondes restantes!</h3><br/>
+				<h3 class="text-center timer"> Temps restant <br/> <span id="time">00:000</span></h3><br/>
 				<?php if($question['MEDIA']!=null)
 				{
 					?> <div class="row"> <?php
@@ -198,7 +207,7 @@
 							
 						<?php if ($question["TYPE_QUEST"]==1)
 						{ ?>
-							<form method ="POST" action="PartieQuizzRep.php?id=<?=$ID_QUEST?>&typeQuest=<?=$question["TYPE_QUEST"]?>"> 
+							<form method ="POST" action="PartieQuizzRep.php?id=<?=$ID_QUEST?>&typeQuest=<?=$question["TYPE_QUEST"]?>&timeStop="> 
 								<fieldset ><legend class="text-center"action="PartieQuizzRep.php"> </legend>
 								<div class="text-center">
 									<div class="m-auto">

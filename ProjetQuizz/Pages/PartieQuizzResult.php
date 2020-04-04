@@ -17,14 +17,44 @@ $ratio=$nbQuestionsJustes/$theme['NB_QUESTIONS'];
 
 $score=$nbQuestionsJustes*2*$difficulte;
 
-/*$time_stop=$_SESSION['time_stop'];
-$time_left=TimeLeft();
+$time_stop=$_SESSION['time_stop'];
 
+?>
+
+<script language="JavaScript">
+    window.onload = function () 
+    {
+        if(localStorage.getItem("time") <=0) 
+        {
+            diff = 0;
+        }
+        else
+        {
+            diff = localStorage.getItem("time");
+        }
+        seconds = ((<?=$time_stop?>-diff) / 1000) | 0;
+		milSeconds = ((<?=$time_stop?>-diff) %1000) | 0;
+
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+		milSeconds = milSeconds < 10 ? "0" + milSeconds : milSeconds;
+
+        display = document.querySelector('#time')
+        display.textContent = seconds + ":" + milSeconds;
+    }
+
+    function clearData() 
+    {
+        localStorage.clear();
+    }     
+</script>
+
+<?php
+$time_left=TimeLeft();
 
 if($time_left>=0 and $score!=0)
 {
     $score+=$time_left;
-}*/
+}
 
 
 if(isset($_SESSION['login']))
@@ -49,14 +79,27 @@ if(isset($_SESSION['login']))
 		<div class="container-fluid jumb">
             <br/>
 			<div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
-				<h3><?php /*if($time_left<=0)
+                <h3><span class="title">Difficulté: 
+                <?php if($difficulte==1)
+                {
+                    print("Facile");
+                }
+                else if($difficulte==2)
+                {
+                    print("Moyen");
+                }
+                else if($difficulte==3)
+                {
+                    print("Difficile");
+                }?></span></h3><br/>
+				<h3><?php if($time_left<=0)
                 { ?>
-                    <span class="timer">Temps écoulé!!</span><br/><br/><br/>
+                    <span class="timer">Temps écoulé!!</span><br/><br/>
                 <?php } 
                 else 
                 { ?>
-                    <span class="dispTime"> Le quizz a été fini en <?php print($time_stop-$time_left);?> secondes</span><br/><br/><br/>
-                <?php } */?>
+                    <span class="dispTime"> Le quizz a été fini en <span id="time">00:000</span> secondes</span><br/><br/><br/>
+                <?php } ?>
                 <span: class="score">Score: <?=$nbQuestionsJustes?>/<?=$theme['NB_QUESTIONS']?>
                 <br/><?=$score?> points </span></h3>
 
@@ -86,8 +129,8 @@ if(isset($_SESSION['login']))
                 <?php } ?>
                 <br/>
                 <div class='row'>
-                    <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?diff=<?=$difficulte?>" class="btn btn-primary btn-lg"> Rejouer</a> </p> </div>
-                    <div class="col"> <p class="text-center"> <a href="PageChoix.php" class="btn btn-secondary btn-lg"> Accueil </a> </p> </div>
+                    <div class="col"> <p class="text-center"> <a href="PartieQuizz.php?diff=<?=$difficulte?>" class="btn btn-primary btn-lg" onclick="clearData()"> Rejouer</a> </p> </div>
+                    <div class="col"> <p class="text-center"> <a href="PageChoix.php" class="btn btn-secondary btn-lg" onclick="clearData()"> Accueil </a> </p> </div>
                 </div>
 
 			</div>
