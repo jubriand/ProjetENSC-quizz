@@ -216,145 +216,37 @@ function TimeLeft()
 
 function RebootSession()
 {
-if(isset($_SESSION['diff']))
+	if(isset($_SESSION['diff']))
+	{
+		unset($_SESSION['diff']);
+	}
+	if(isset($_SESSION['score']))
+	{
+		unset($_SESSION['score']);
+	}
+	if(isset($_SESSION['questionsPassees']))
+	{
+		unset($_SESSION['questionsPassees']);
+	}
+	if(isset($_SESSION['new_theme']))
+	{
+		unset($_SESSION['new_theme']);
+	}
+}
+function AfficheDifficulte($difficulte)
 {
-	unset($_SESSION['diff']);
-}
-if(isset($_SESSION['score']))
-{
-	unset($_SESSION['score']);
-}
-if(isset($_SESSION['questionsPassees']))
-{
-	unset($_SESSION['questionsPassees']);
-}
-if(isset($_SESSION['new_theme']))
-{
-	unset($_SESSION['new_theme']);
-}
-}
-
-function TypeQuestion($id)
-{
-
-	$stmt = getDb()->prepare('select TYPE_QUEST from question where id=?');
-	$stmt->execute(array($id));
-	$type = $stmt->fetch(); // Access first (and only) result line
-	return $type;
-}
-
-function AfficherIntitule($ID_QUEST)
-{
-	$stmt = getDb()->prepare('select intitule from question where ID_QUEST=?');
-	$stmt->execute(array($ID_QUEST));
-	$intitule = $stmt->fetch(); // Access first (and only) result line
-	?>
-	<legend class="text-center"> <?php print $intitule['intitule']; ?> </legend>; 
-	<img class="img-fluid" src="../Images/Im_quest/<?= $question['MEDIA'] ?>" />
-	<?php
-	
-}
-
-function QuestionVraiFaux($ID_QUEST) //question vrai ou faux (TYPE_QUEST=0)
-{	
-	
-		    AfficherIntitule($ID_QUEST);
-
-		?>
-		
-			<form method ="POST" action="PartieQuizzRep.php?rep=<?value ?>"> 
-				<fieldset ><legend class="text-center">  </legend>
-				<br/>
-				<div align="center">
-					
-					<div class="form-group">
-						<label for ="reponse"> Vrai </label>
-						<input type="radio" name="reponse" value="vrai" size="17"/>
-						<label for ="reponse"> Faux </label>
-						<input type="radio" name="reponse" value="faux" size="17"/>
-					</div>
-				</div>
-				
-				
-				<p class="text-center"> <input type="submit" value="Envoyer"/> </p>
-			</form>
-			$rep=value;
-		<?php
-} //?quest=<?= $question['ID_QUEST']?
-
-function QuestionOuverte($ID_QUEST) //question ouverte (TYPE_QUEST=1)
-{	
-		AfficherIntitule($ID_QUEST);
-		
-			
-		?>
-
-			<form method ="POST" action="PartieQuizzRep.php"> 
-				<fieldset ><legend class="text-center"action="PartieQuizzRep.php"> </legend>
-				<br/>
-				<div class="text-center">
-					<div class="form-group">
-						<input type="text" name="reponse" size ="50"/> <br/>
-					</div>
-					
-				</div>
-				</fieldset>
-				
-				<p class="text-center"> <input type="submit" value="Envoyer" /> </p>
-			</form>	
-		<?php
-}
-
-function QuestionCM($ID_QUEST) //question choix multiple (TYPE_QUEST=2)
-{	
-	
-		
-		AfficherIntitule($ID_QUEST);
-		?>
-
-			<form method ="POST" action="PartieQuizzRep.php">
-				<fieldset ><legend class="text-center"> </legend>
-				<br/>
-				<div align="center">
-					
-					<div class="form-group">
-						<label for="rep1"> réponse 1</label>
-						<input type="checkbox" id="rep1" name="rep1" value="1" size="17"/><br/>
-						
-						<label for="rep2"> réponse 2</label>
-						<input type="checkbox" id="rep2" name="rep2" value="2" size="17"/><br/>
-						
-						<label for="vehicle3"> réponse 3</label>
-						<input type="checkbox" id="vehicle3" name="rep3" value="3" size="17"/><br/>
-
-						<label for="rep4"> réponse 4</label>
-						<input type="checkbox" id="rep4" name="rep4" value="4" size="17"/><br/>
-						
-						
-					</div>
-				</div>
-				
-				
-				<p class="text-center"> <input type="submit" value="Envoyer" /> </p>
-			</form>	
-		<?php
-} 
-
-function Reponse($ID_QUEST)
-{
-	$stmt = getDb()->prepare('select intitule from reponse where ID_QUEST=?');
-	$stmt->execute(array($ID_QUEST));
-	$reponse = $stmt->fetch();
-	 if ($_POST['reponse']==$reponse['intitule'])
-	 {
-		print "Bravo, la réponse est juste";
-	 }
-	 else 
-	 {
-	 	 print "la reponse est fausse, la bonne réponse était : "; ?>
-		 <legend class="text-center"> <?php print $reponse['intitule']; ?> </legend>;<?php
-	 }
+	if($difficulte==1)
+	{
+		print("Facile");
+	}
+	else if($difficulte==2)
+	{
+		print("Moyen");
+	}
+	else if($difficulte==3)
+	{
+		print("Difficile");
+	}
 }
 ?>
-
 </html>

@@ -80,18 +80,7 @@ if(isset($_SESSION['login']))
             <br/>
 			<div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
                 <h3><span class="title">Difficulté: 
-                <?php if($difficulte==1)
-                {
-                    print("Facile");
-                }
-                else if($difficulte==2)
-                {
-                    print("Moyen");
-                }
-                else if($difficulte==3)
-                {
-                    print("Difficile");
-                }?></span></h3><br/>
+                <?php AfficheDifficulte($difficulte);?></span></h3><br/>
 				<h3><?php if($time_left<=0)
                 { ?>
                     <span class="timer">Temps écoulé!!</span><br/><br/>

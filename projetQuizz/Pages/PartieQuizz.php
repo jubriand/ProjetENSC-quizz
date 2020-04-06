@@ -159,27 +159,9 @@
 	<body>
 		<?php require_once "../Includes/header.php";?>
 		<div class="container-fluid">
-			<?php
-			/*
-			if ($question["TYPE_QUEST"]==0)
-			{
-				QuestionVraiFaux($RANDINT); //est ce que le theme doit etre un argument � la fonction ? il faut tester
-			
-			}
-			elseif ($question["TYPE_QUEST"]==1) 
-			{
-				QuestionOuverte($RANDINT);
-			}
-			elseif ($question["TYPE_QUEST"]==2) 
-			{
-				QuestionCM($RANDINT);
-			}
-			
-			Reponse($RANDINT);
-			*/
-			?>
 			<br/>
 			<div class="jumbotron">
+				<h3 class="text-center"><span class="title"><?=$theme['NOM_THEME']?>: <?php AfficheDifficulte($difficulte);?></span></h3><br/>
 				<h3 class="text-center timer"> Temps restant <br/> <span id="time">00:000</span></h3><br/>
 				<?php if($question['MEDIA']!=null)
 				{
@@ -226,7 +208,7 @@
 							{ 
 								if($i<(3+$difficulte))
 								{
-									if($i%3==0)
+									if($i%2==0)
 									{
 										print "<div class='row'>";
 									}
@@ -239,7 +221,7 @@
 										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $reponse['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg choiceBtn"> <?= $reponse['INTITULE'] ?> </a> </p> </div>
 									<?php }
 									$i++;  
-									if($i%3==0)
+									if($i%2==0)
 									{
 										print "</div></br>";
 									}
