@@ -208,7 +208,7 @@
 							{ 
 								if($i<(3+$difficulte))
 								{
-									if($i%2==0)
+									if($i%3==0)
 									{
 										print "<div class='row'>";
 									}
@@ -221,7 +221,7 @@
 										<div class="col"> <p class="text-center"> <a href="PartieQuizzRep.php?id=<?= $reponse['ID_REPONSE'] ?>&typeQuest=<?=$question["TYPE_QUEST"]?>" class="btn btn-primary btn-lg choiceBtn"> <?= $reponse['INTITULE'] ?> </a> </p> </div>
 									<?php }
 									$i++;  
-									if($i%2==0)
+									if($i%3==0)
 									{
 										print "</div></br>";
 									}

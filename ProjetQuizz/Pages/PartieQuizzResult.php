@@ -79,8 +79,7 @@ if(isset($_SESSION['login']))
 		<div class="container-fluid jumb">
             <br/>
 			<div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
-                <h3><span class="title">Difficulté: 
-                <?php AfficheDifficulte($difficulte);?></span></h3><br/>
+                <h3><span class="title"><?=$theme['NOM_THEME']?>: <?php AfficheDifficulte($difficulte);?></span></h3><br/>
 				<h3><?php if($time_left<=0)
                 { ?>
                     <span class="timer">Temps écoulé!!</span><br/><br/>
