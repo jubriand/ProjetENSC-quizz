@@ -38,6 +38,7 @@
 		function startTimer(duration, display) {
 			var start = Date.now(),
 			diff,
+			minutes,
 			seconds,
 			milSeconds;
 			function timer() {
@@ -47,13 +48,15 @@
 				localStorage.setItem("time",diff);
 
 				// does the same job as parseInt truncates the float
+				minutes = (diff / 60000) | 0;
 				seconds = (diff / 1000) | 0;
 				milSeconds = (diff %1000) | 0;
 
+				minutes = minutes < 10 ? "0" + minutes : minutes;
 				seconds = seconds < 10 ? "0" + seconds : seconds;
 				milSeconds = milSeconds < 10 ? "0" + milSeconds : milSeconds;
 
-				display.textContent = seconds + ":" + milSeconds; 
+				display.textContent = minutes + ":" + seconds + ":" + milSeconds; 
 
 				if (diff <= 0) {
 					window.location.href = "PartieQuizzResult.php";
@@ -162,7 +165,7 @@
 			<br/>
 			<div class="jumbotron">
 				<h3 class="text-center"><span class="title"><?=$theme['NOM_THEME']?>: <?php AfficheDifficulte($difficulte);?></span></h3><br/>
-				<h3 class="text-center timer"> Temps restant <br/> <span id="time">00:000</span></h3><br/>
+				<h3 class="text-center timer"> Temps restant <br/> <span id="time">00:00:000</span></h3><br/>
 				<?php if($question['MEDIA']!=null)
 				{
 					?> <div class="row"> <?php

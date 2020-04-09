@@ -177,7 +177,7 @@ function AddMedia()
 		$uploadOk = 0;
 	}
 	// On vérifie la taille dufichier
-	if ($_FILES["MEDIA"]["size"] > 500000) 
+	if ($_FILES["MEDIA"]["size"] > 100000000) 
 	{
 		$message="Le fichier que vous essayez d'ajouter est trop lourd";
 		$uploadOk = 0;

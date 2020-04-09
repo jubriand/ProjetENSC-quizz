@@ -32,14 +32,18 @@ $time_stop=$_SESSION['time_stop'];
         {
             diff = localStorage.getItem("time");
         }
+        minutes = ((<?=$time_stop?>-diff) / 60000) | 0;
         seconds = ((<?=$time_stop?>-diff) / 1000) | 0;
 		milSeconds = ((<?=$time_stop?>-diff) %1000) | 0;
 
-		seconds = seconds < 10 ? "0" + seconds : seconds;
-		milSeconds = milSeconds < 10 ? "0" + milSeconds : milSeconds;
-
+        string="";
+        if(minutes!="0")
+        {
+            string= string + minutes +" minutes, ";
+        }
+        string= string + seconds + " secondes et " + milSeconds + " millièmes"
         display = document.querySelector('#time')
-        display.textContent = seconds + ":" + milSeconds;
+        display.textContent = string;
     }
 
     function clearData() 
@@ -86,7 +90,7 @@ if(isset($_SESSION['login']))
                 <?php } 
                 else 
                 { ?>
-                    <span class="dispTime"> Le quizz a été fini en <span id="time">00:000</span> secondes</span><br/><br/><br/>
+                    <span class="dispTime"> Le quizz a été fini en <span id="time"></span></span><br/><br/><br/>
                 <?php } ?>
                 <span: class="score">Score: <?=$nbQuestionsJustes?>/<?=$theme['NB_QUESTIONS']?>
                 <br/><?=$score?> points </span></h3>
