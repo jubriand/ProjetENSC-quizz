@@ -4,17 +4,13 @@ session_start();
 require_once "../Includes/functions.php";
 $ID_THEME=$_SESSION['ID_THEME'];
 
-$stmt = getDb()->prepare("select * from question where ID_THEME=?");
+SuppQuestionReponse($ID_THEME,'ID_THEME');
+
+$stmt = getDb()->prepare("select * from theme where ID_THEME=?");
 $stmt->execute(array($ID_THEME));
+$theme = $stmt->fetch();
+unlink("../Images/".$theme['PHOTOS']);
 
-
-foreach($stmt as $question)
-{
-    $stmt = getDb()->prepare("delete from reponse where ID_QUEST=?");
-    $stmt->execute(array($question['ID_QUEST']));
-    $stmt = getDb()->prepare("delete from question where ID_QUEST=?");
-    $stmt->execute(array($question['ID_QUEST']));
-}
 $stmt = getDb()->prepare("delete from theme where ID_THEME=?");
 $stmt->execute(array($ID_THEME));
 

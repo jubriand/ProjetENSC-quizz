@@ -96,6 +96,21 @@ function RecupNewId($table)
 	return $new_id;
 }
 
+function SuppQuestionReponse($id, $column)
+{
+	$stmt = getDb()->prepare("select * from question where `".$column."`=?");
+	$stmt->execute(array($id));
+
+	foreach($stmt as $question)
+	{
+		unlink("../Images/".$question['MEDIA']);
+		$stmt = getDb()->prepare("delete from reponse where ID_QUEST=?");
+		$stmt->execute(array($question['ID_QUEST']));
+		$stmt = getDb()->prepare("delete from question where ID_QUEST=?");
+		$stmt->execute(array($question['ID_QUEST']));
+	}
+}
+
 function AddSupp($element, $ID_QUEST='')
 {?>
 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Supp<?=$element?><?=$ID_QUEST?>">
