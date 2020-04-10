@@ -14,10 +14,10 @@ $ID_THEME = $_SESSION['ID_THEME'];
             <div class="jumbotron">
                 <?php if (!empty($_POST['INTITULE']) and isset($_POST['TYPE_QUEST']))
                 {
-                    if(!empty($_FILES['MEDIA']['name']))
+                    if(!empty($_FILES['MEDIA']['name'])) //Ajoute un media au répertoire si l'utilisateur l'a sélectionné
                     {
                         $message=AddMedia('MEDIA');
-                        if($message!="Ok")
+                        if($message!="Ok") //Affiche message d'erreur si l'ajout n'a pas pu être possible
                         { ?>
                             <div class="alert alert-danger" role="alert">
                                 <img src="../Icons/svg/warning.svg" alt="warning">
@@ -27,7 +27,7 @@ $ID_THEME = $_SESSION['ID_THEME'];
                         }
                     }
 
-                    if(empty($_FILES['MEDIA']['name']) or $message=="Ok")
+                    if(empty($_FILES['MEDIA']['name']) or $message=="Ok") //Si pas d'erreurs on ajoute la question en BDD
                     {
                         $intitule=escape($_POST['INTITULE']);
                         $type_quest=$_POST['TYPE_QUEST'];
@@ -37,7 +37,8 @@ $ID_THEME = $_SESSION['ID_THEME'];
 
                         $stmt = getDb()->prepare("insert into question values('$new_id', '$intitule', '$type_quest', '$media', '$ID_THEME')");
                         $stmt->execute();
-        
+
+                        //On déduit du type de la question le nombre de réponses devant être affichées
                         if($type_quest==0)
                         {
                             $nbReponses=2;
@@ -50,6 +51,7 @@ $ID_THEME = $_SESSION['ID_THEME'];
                         {
                             $nbReponses=6;
                         }
+                        //On redirige sur l'ajout des réponses associées à la question en indiquant le nombre de réponses à rentrer
                         redirect("AjoutReponses.php?id=$new_id&nbRep=$nbReponses");
                     }          
                 } ?>

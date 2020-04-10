@@ -37,7 +37,7 @@
 	<script language="JavaScript">
 		function startTimer(duration, display) {
 			var start = Date.now(),
-			diff,
+			diff= duration - ((Date.now() - start) | 0),
 			minutes,
 			seconds,
 			milSeconds;

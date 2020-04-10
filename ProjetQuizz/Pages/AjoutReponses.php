@@ -10,7 +10,7 @@ if (!empty($_POST['INTITULE1']))
 {
     $new_id=RecupNewId('reponse');
     
-    for($i=1; $i<=$nbReponses; $i++)
+    for($i=1; $i<=$nbReponses; $i++) //On ajoute en BDD toutes les réponses rentrées par l'utilisateur
     {
         $intitule=escape($_POST['INTITULE'.$i]);
         $is_true=$_POST['IS_TRUE'.$i];
@@ -19,12 +19,12 @@ if (!empty($_POST['INTITULE1']))
         $new_id++;
     }
     
-    if($_SESSION['new_theme']>1)
+    if($_SESSION['new_theme']>1) //Si on est dans le cas de la création d'un nouveau thème...
     {
-        $_SESSION['new_theme']--;
-        redirect("AjoutQuestion.php");
+        $_SESSION['new_theme']--;//...On indique qu'on à ajouter une question...
+        redirect("AjoutQuestion.php");//...et on retourne sur l'ajout de questionS
     }
-    else
+    else //Si il s'agit d'un thème existant on retourne sur la page du thème
     {
         redirect("SelectionTheme.php");
     }
