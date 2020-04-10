@@ -49,8 +49,8 @@
 
 				// does the same job as parseInt truncates the float
 				minutes = (diff / 60000) | 0;
-				seconds = (diff / 1000) | 0;
-				milSeconds = (diff %1000) | 0;
+				seconds = ((diff % 60000) / 1000) | 0;
+				milSeconds = ((diff % 60000) % 1000) | 0;
 
 				minutes = minutes < 10 ? "0" + minutes : minutes;
 				seconds = seconds < 10 ? "0" + seconds : seconds;

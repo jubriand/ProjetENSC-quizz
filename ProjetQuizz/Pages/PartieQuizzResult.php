@@ -33,8 +33,8 @@ $time_stop=$_SESSION['time_stop'];
             diff = localStorage.getItem("time");
         }
         minutes = ((<?=$time_stop?>-diff) / 60000) | 0;
-        seconds = ((<?=$time_stop?>-diff) / 1000) | 0;
-		milSeconds = ((<?=$time_stop?>-diff) %1000) | 0;
+        seconds = (((<?=$time_stop?>-diff) % 60000) / 1000) | 0;
+		milSeconds = (((<?=$time_stop?>-diff) % 60000) %1000) | 0;
 
         string="";
         if(minutes!="0")
