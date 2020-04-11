@@ -4,19 +4,20 @@ session_start();
 require_once "../Includes/functions.php";
 require_once "../Includes/head.php";
 
-if(!isset($_SESSION['ID_THEME']))
+//On récupère les infos sur le thème sélectinné
+if(!isset($_SESSION['ID_THEME']))//Cas d'une arrivée depuis l'accueil
 {
     $ID_THEME = $_GET['id'];
     $_SESSION['ID_THEME']=$ID_THEME;
 }
-else
+else //Cas d'une arrivée autre (ex: après modif)
 {
     $ID_THEME=$_SESSION['ID_THEME'];
 }
 
 $stmt = getDb()->prepare('select * from theme where ID_THEME=?');
 $stmt->execute(array($ID_THEME));
-$theme = $stmt->fetch(); // Access first (and only) result line
+$theme = $stmt->fetch(); 
 ?>
 
 
@@ -26,12 +27,9 @@ $theme = $stmt->fetch(); // Access first (and only) result line
         <div class="container">
             <br/><div class="jumbotron">
                 <div class="row">
-                    <?php if( $theme['PHOTOS']!=NULL)
-                    {?>
-                        <div class="col-md-5 col-sm-6">
-                            <img class="img-fluid" src="../Images/<?= $theme['PHOTOS'] ?>" title="<?= $theme['NOM_THEME'] ?>" />
-                        </div>
-                    <?php } ?>
+                    <div class="col-md-5 col-sm-6">
+                        <img class="img-fluid" src="../Images/<?= $theme['PHOTOS'] ?>" title="<?= $theme['NOM_THEME'] ?>" />
+                    </div>
                     <div class="col-md-7 col-sm-6">
                         <br/>
                         <h2 class= "text-center"><span class="title"><?= $theme['NOM_THEME'] ?></span></h2><br/><br/>
@@ -58,7 +56,7 @@ $theme = $stmt->fetch(); // Access first (and only) result line
                     </div>
                 </div>            
             </div>
-            <?php if($_SESSION['mode']=="admin")
+            <?php if($_SESSION['mode']=="admin") //Si on est en mode admin la liste des questions et de leurs réponses s'affiche
             {
                 $questions = getDb()->prepare('select * from question where ID_THEME=? order by ID_QUEST');
                 $questions->execute(array($ID_THEME));

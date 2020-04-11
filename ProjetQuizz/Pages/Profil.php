@@ -4,8 +4,6 @@ session_start();
 require_once "../Includes/functions.php";
 require_once "../Includes/head.php"; 
 
-
-
 // Recuperer les infos sur l'utilisateur
 $login=$_SESSION['login'];
 $stmt = getDb()->query("select * from utilisateur where PSEUDO='$login'"); 

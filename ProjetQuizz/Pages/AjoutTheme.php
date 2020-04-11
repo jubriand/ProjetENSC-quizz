@@ -11,34 +11,32 @@ require_once "../Includes/functions.php";
         <div class="container-fluid"> <br/>
             <div class="jumbotron">
 
-                <?php if (!empty($_POST['NOM_THEME']) and !empty($_POST['NB_QUESTIONS']) and !empty($_POST['DESC_THEME']) and !empty($_FILES['MEDIA']["name"])) 
+                <?php if (!empty($_POST['NOM_THEME']) and $_POST['NB_QUESTIONS']>=10 and !empty($_POST['DESC_THEME']) and !empty($_FILES['MEDIA']["name"])) 
                 {
-                    if($_POST['NB_QUESTIONS']>=10)
+                    $message=AddMedia(); //On ajoute la photo au répertoire
+                    if($message!="Ok") //Si l'ajout n'a pas pu être effectuer on affiche le essage d'erreur
+                    { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <img src="../Icons/svg/warning.svg" alt="warning">
+                            <?=$message?>
+                        </div>
+                    <?php }
+                    else //Si l'ajout a pu être effectuer on rentre le thème en BDD
                     {
-                        $message=AddMedia();
-                        if($message!="Ok")
-                        { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <img src="../Icons/svg/warning.svg" alt="warning">
-                                <?=$message?>
-                            </div>
-                        <?php }
-                        else
-                        {
-                            $NOM_THEME=escape($_POST['NOM_THEME']);
-                            $NB_QUESTIONS=escape($_POST['NB_QUESTIONS']);
-                            $DESC_THEME=escape($_POST['DESC_THEME']);
-                            $MEDIA=escape($_FILES['MEDIA']["name"]);
+                        $NOM_THEME=escape($_POST['NOM_THEME']);
+                        $NB_QUESTIONS=escape($_POST['NB_QUESTIONS']);
+                        $DESC_THEME=escape($_POST['DESC_THEME']);
+                        $MEDIA=escape($_FILES['MEDIA']["name"]);
         
-                            $new_id=RecupNewId('theme');
-        
-                            $stmt = getDb()->prepare("insert into theme values('$new_id', '$NOM_THEME', '$NB_QUESTIONS','$DESC_THEME', '$MEDIA', 0)");
-                            $stmt->execute();
-                            
-                            $_SESSION['new_theme']=$NB_QUESTIONS;
-                            $_SESSION['ID_THEME']=$new_id;
-                            redirect("AjoutQuestion.php");
-                        }    
+                        $new_id=RecupNewId('theme');
+    
+                        $stmt = getDb()->prepare("insert into theme values('$new_id', '$NOM_THEME', '$NB_QUESTIONS','$DESC_THEME', '$MEDIA', 0)");
+                        $stmt->execute();
+                        
+                        //On définit que l'on vient d'ajouter un thème, On garde en mémoire le thème ajouté et on renvoit sur l'ajout des questions
+                        $_SESSION['new_theme']=$NB_QUESTIONS; 
+                        $_SESSION['ID_THEME']=$new_id;
+                        redirect("AjoutQuestion.php");
                     }                
                 } ?>
 

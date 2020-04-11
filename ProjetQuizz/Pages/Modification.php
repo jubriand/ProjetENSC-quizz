@@ -13,11 +13,11 @@ $id = $_GET['id'];
 if($table=='utilisateur')
 {
     $primKey='PSEUDO';
-    $origine="Profil.php";
+    $origine="Profil.php"; //Permet de retourner sur la page d'origine
 }
 else
 {
-    $origine="SelectionTheme.php";
+    $origine="SelectionTheme.php"; //Permet de retourner sur la page d'origine
     if($table=='theme')
     {
         $primKey='ID_THEME';
@@ -45,21 +45,23 @@ $infoBDD=$stmt->fetch();
         <div class="container-fluid"> <br/>
             <div class="jumbotron">
                 <?php
-                if(!empty($_POST['pastInfo']) and !empty($_POST['newInfo']) and! empty($_POST['confirmInfo']))
+                if(!empty($_POST['pastInfo']) and !empty($_POST['newInfo']) and !empty($_POST['confirmInfo']))
                 {
-                    if($_POST['pastInfo']==$infoBDD[$modif])
+                    if($_POST['pastInfo']==$infoBDD[$modif]) 
                     {
                         if($_POST['newInfo']==$_POST['confirmInfo'])
                         {
+                            //Les véérification sont bien remplies on fait la modif
                             $newInfo=escape($_POST['newInfo']);
                             $stmt = getDb()->prepare("update `" . $table . "` set `" . $modif . "`=? where `" . $primKey. "`=?");
                             $stmt->execute(array($newInfo, $id));
-                            if($modif=='PSEUDO')
+                            if($modif=='PSEUDO') //Si l'élément modifier est le login on met à jour la session
                             {
                                 $_SESSION['login'] = $_POST['newInfo'];
                             }
-                            redirect($origine);
+                            redirect($origine); //On netourne sur la page d'origine
                         }
+                        //Si les vérifications n'ont pas été remplies on affiche le message d'erreur adapté
                         else
                         {?>
                             <div class="alert alert-danger" role="alert">

@@ -1,9 +1,9 @@
 <html>
 <?php
 
-// Connect to the database. Returns a PDO object
-function getDb() {
-    // Local deployment
+// Connexion à la BDD
+function getDb() 
+{
     $server = "localhost";
     $username = "test";
     $password = "test";
@@ -13,12 +13,13 @@ function getDb() {
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
-// Check if a user is connected
+// Regarde si un utilisateur est connecté
 function isUserConnected() 
 {
     return isset($_SESSION['login']);
 }
 
+//Regarde si un utilisateur est admin
 function isAdmin()
 {
     $stmt = getDb()->prepare('select * from utilisateur where PSEUDO=?');
@@ -27,7 +28,7 @@ function isAdmin()
     return $is_admin['IS_ADMIN'];
 }
 
-// Redirect to a URL
+// Renvoie à l'url défini
 function redirect($url) {
     header("Location: $url");
 }
@@ -37,44 +38,13 @@ function escape($value) {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
 }
 
+//Ajoute un bouton de modification
 function AddModif($modif, $table, $id)
 {?>
 	<a class="btn btn-secondary navbar-btn" type="button" href="Modification.php?modif=<?=$modif?>&table=<?=$table?>&id=<?=$id?>"><img src="../Icons/svg/pencil.svg" alt="pencil"> Modifier</a>
 <?php }
 
-function formUser($type)
-{?>	
-<div class="container">
-    <br/><div class="jumbotron">
-		<form method ="POST">
-		
-			<fieldset><legend class="text-center"> <h3> <span class="title"><?php print$type; ?></span></h3> </legend>
-				<br/>
-				<br/>
-				<div class="row align-items-center">
-					<div class="form-group">
-						<label for ="login"> Login : </label>
-						<input type="text" name="login" size ="17"/> <br/>
-					</div>
-					<div class="form-group">
-						<label for ="mdp"> Mot de passe : </label>
-						<input type="password" name="mdp" size="17"/>
-					</div>
-					<?php if($type=='Inscription'){?>
-						<div class="form-group">
-						<label for ="mdp"> Cochez cette case pour être administrateur: </label>
-						<input type="radio" name="admin"/>
-						</div>
-					<?php } ?>
-				</div>
-				
-			</fieldset>
-			<br/><p class="text-center"><button type="submit" class="btn btn-primary">Envoyer</button></p><br/>
-		</form>
-	</div>
-</div>
-<?php }
-
+//Permet de récupérer l'id d'un nouvel élément
 function RecupNewId($table)
 {
 	if($table=='theme')
@@ -96,6 +66,7 @@ function RecupNewId($table)
 	return $new_id;
 }
 
+// Permet de supprimer une question et les réponses et média qui lui sont associées
 function SuppQuestionReponse($id, $column)
 {
 	$stmt = getDb()->prepare("select * from question where `".$column."`=?");
@@ -111,6 +82,7 @@ function SuppQuestionReponse($id, $column)
 	}
 }
 
+// Ajoute un bouton de supression
 function AddSupp($element, $ID_QUEST='')
 {?>
 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Supp<?=$element?><?=$ID_QUEST?>">
@@ -139,6 +111,7 @@ function AddSupp($element, $ID_QUEST='')
 	</div>
 <?php }
 
+//Correspond au formulaire de Connexion/Inscription
 function AddIdent($type)
 {?>
     <!-- Modal -->
@@ -179,6 +152,7 @@ function AddIdent($type)
     </div>
 <?php }
 
+// Permet d'ajouter un média au répetoire du site
 function AddMedia()
 {
 	$target_dir = "../Images/";
@@ -213,13 +187,14 @@ function AddMedia()
 	return $message;
 }
 
-
+//Permet de récupérer la date en secondes
 function microtime_float()
 {
   list($usec, $sec) = explode(" ", microtime());
   return ((float)$sec);
 }
 
+//Permet de calculer le nombre de secondes restantes lors d'une partie
 function TimeLeft()
 {
 	$time_start=$_SESSION['time_start'];
@@ -229,6 +204,7 @@ function TimeLeft()
 	return $time_left;
 }
 
+//Réinitialise les variables en session
 function RebootSession()
 {
 	if(isset($_SESSION['diff']))
@@ -248,6 +224,8 @@ function RebootSession()
 		unset($_SESSION['new_theme']);
 	}
 }
+
+//Affiche le niveau de difficulté
 function AfficheDifficulte($difficulte)
 {
 	if($difficulte==1)

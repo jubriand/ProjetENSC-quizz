@@ -10,20 +10,23 @@ $stmt = getDb()->prepare('select * from theme where ID_THEME=?');
 $stmt->execute(array($ID_THEME));
 $theme = $stmt->fetch();
 
+//On récupère les infos en session
 $difficulte=$_SESSION['diff'];
 $nbQuestionsJustes=$_SESSION['score'];
+$time_stop=$_SESSION['time_stop'];
 
+//On calcule le pourcentage de réponses justes
 $ratio=$nbQuestionsJustes/$theme['NB_QUESTIONS'];
 
+//On attribue des points par questions justes
 $score=$nbQuestionsJustes*2*$difficulte;
-
-$time_stop=$_SESSION['time_stop'];
 
 ?>
 
 <script language="JavaScript">
     window.onload = function () 
     {
+        //A l'arrivée sur la page on récupère le temps restant sur le chrono
         if(localStorage.getItem("time") <=0) 
         {
             diff = 0;
@@ -32,6 +35,7 @@ $time_stop=$_SESSION['time_stop'];
         {
             diff = localStorage.getItem("time");
         }
+        //On calcule le temps mis par le joueur et on l'affiche sur la page
         minutes = ((<?=$time_stop?>-diff) / 60000) | 0;
         seconds = (((<?=$time_stop?>-diff) % 60000) / 1000) | 0;
 		milSeconds = (((<?=$time_stop?>-diff) % 60000) %1000) | 0;
@@ -48,16 +52,16 @@ $time_stop=$_SESSION['time_stop'];
 
     function clearData() 
     {
-        localStorage.clear();
+        localStorage.clear(); //On réinitialise le chrono lorsqu'on quitte la page
     }     
 </script>
 
 <?php
-$time_left=TimeLeft();
+$time_left=TimeLeft(); //On mesure le nombre de secondes restantes sur le chrono
 
 if($time_left>=0 and $score!=0)
 {
-    $score+=$time_left;
+    $score+=$time_left; //On attribue 1 point par seconde restante
 }
 
 
@@ -84,7 +88,8 @@ if(isset($_SESSION['login']))
             <br/>
 			<div class="jumbotron col-xl-5 col-lg-6 col-md-7 col-sm-9 text-center">
                 <h3><span class="title"><?=$theme['NOM_THEME']?>: <?php AfficheDifficulte($difficulte);?></span></h3><br/>
-				<h3><?php if($time_left<=0)
+				
+                <h3><?php if($time_left<=0) //On affiche le temps passé sur le quizz
                 { ?>
                     <span class="timer">Temps écoulé!!</span><br/><br/>
                 <?php } 
@@ -92,18 +97,20 @@ if(isset($_SESSION['login']))
                 { ?>
                     <span class="dispTime"> Le quizz a été fini en <span id="time"></span></span><br/><br/><br/>
                 <?php } ?>
+
                 <span: class="score">Score: <?=$nbQuestionsJustes?>/<?=$theme['NB_QUESTIONS']?>
                 <br/><?=$score?> points </span></h3>
 
                 <?php if($theme['BEST_SCORE']<$score)
                 {
+                    //Si c'est le meilleur score du thème on met à jour la BDD
                     $stmt = getDb()->prepare('update theme set BEST_SCORE=? where ID_THEME=?');
                     $stmt->execute(array($score,$ID_THEME));
                     ?><br/><h4 class="bestScore">Meilleur Score!!</h4>
                 <?php } ?>
                 
                 <br/><br/>
-                <?php if($ratio>0.8)
+                <?php if($ratio>0.8) //On affiche un message en fonction du pourcentage de réussite
                 { ?>
                     <h5>Bravo, ce thème n'a plus aucun secret pour vous</h5>
                 <?php }

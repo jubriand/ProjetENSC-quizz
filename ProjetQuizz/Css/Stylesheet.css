@@ -33,7 +33,7 @@ body
 }
 .jumbotron 
 {
-    margin-bottom: 60px; /*evite la superposition du footer et des jumbotron*/
+    margin-bottom: 70px; /*evite la superposition du footer et des jumbotron*/
 
 }
 
