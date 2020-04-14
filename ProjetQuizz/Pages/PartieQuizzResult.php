@@ -61,7 +61,7 @@ $time_left=TimeLeft(); //On mesure le nombre de secondes restantes sur le chrono
 
 if($time_left>=0 and $score!=0)
 {
-    $score+=$time_left; //On attribue 1 point par seconde restante
+    $score+=intdiv($time_left,1000); //On attribue 1 point par seconde restante
 }
 
 

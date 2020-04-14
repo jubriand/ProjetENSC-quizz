@@ -191,14 +191,15 @@ function AddMedia()
 function microtime_float()
 {
   list($usec, $sec) = explode(" ", microtime());
-  return ((float)$sec);
+  $time=((float)$sec*1000)+(float)$usec;
+  return $time;
 }
 
 //Permet de calculer le nombre de secondes restantes lors d'une partie
 function TimeLeft()
 {
 	$time_start=$_SESSION['time_start'];
-	$time_stop=intdiv($_SESSION['time_stop'],1000);
+	$time_stop=$_SESSION['time_stop'];
 	$time_check = microtime_float() - $time_start;
 	$time_left= $time_stop-$time_check;
 	return $time_left;
