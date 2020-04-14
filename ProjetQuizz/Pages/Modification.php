@@ -85,7 +85,7 @@ $infoBDD=$stmt->fetch();
                 <br/>
                 <div class=text-center>
                     <label for ="pastInfo"> Rentrez l'ancien élément: </label>
-                    <?php if($table!="UTILISATEUR")
+                    <?php if($table!="utilisateur")
                     { ?>
                         <input type="text" name="pastInfo" value="<?=$infoBDD[$modif]?>" size ="30"/> <br/><br/>
                     <?php }
