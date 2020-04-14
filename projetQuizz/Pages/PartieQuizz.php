@@ -236,6 +236,7 @@
 						}
 					}?>
 				</div>
+				</div>
 			</div>
 		</div>
 		<?php require_once "../Includes/footer.php"; ?> 

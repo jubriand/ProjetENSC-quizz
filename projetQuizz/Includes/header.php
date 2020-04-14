@@ -35,9 +35,9 @@
     <?php } 
     else {?>
     <ul class="navbar-nav ml-auto">
-      <button class="btn btn-danger navbar-btn" type="button" data-toggle="modal" data-target="#SuppConnexion">Connexion</button> 
+      <button class="btn btn-danger navbar-btn" type="button" data-toggle="modal" data-target="#Connexion">Connexion</button> 
       <?php AddIdent("Connexion");?>
-      <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#SuppInscription">Inscription</button>
+      <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#Inscription">Inscription</button>
       <?php AddIdent("Inscription");?>
     <?php } ?>
 	  </ul>

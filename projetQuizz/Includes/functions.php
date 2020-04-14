@@ -115,11 +115,11 @@ function AddSupp($element, $ID_QUEST='')
 function AddIdent($type)
 {?>
     <!-- Modal -->
-    <div class="modal fade" id="Supp<?=$type?>" tabindex="-1" role="dialog" aria-labelledby="Supp<?=$type?>Label" aria-hidden="true">
+    <div class="modal fade" id="<?=$type?>" tabindex="-1" role="dialog" aria-labelledby="<?=$type?>Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="Supp<?=$type?>Label"><?=$type?></h5>
+                    <h5 class="modal-title" id="<?=$type?>Label"><?=$type?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         	            <span aria-hidden="true">&times;</span>
                     </button>
@@ -147,6 +147,32 @@ function AddIdent($type)
 							<button type="submit" class="btn btn-primary">Confirmer</button>
 						</div>
 					</form>
+            </div>
+        </div>
+    </div>
+<?php }
+
+//Affiche le Tutoriel dans une modal
+function AddTuto()
+{?>
+    <!-- Modal -->
+    <div class="modal fade" id="Tuto" tabindex="-1" role="dialog" aria-labelledby="TutoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TutoLabel"> Tutoriel </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        	            <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe src="../Images/TutoQuizzENSC.mp4" title="Tutoriel"></iframe>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+				</div>
             </div>
         </div>
     </div>
