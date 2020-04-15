@@ -239,7 +239,6 @@
 				</div>
 			</div>
 		</div>
-		<?php require_once "../Includes/footer.php"; ?> 
 		<?php require_once "../Includes/scripts.php"; ?> 
 	</body>
 </html>

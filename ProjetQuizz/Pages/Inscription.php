@@ -19,7 +19,7 @@ if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
     $stmt = getDb()->prepare("insert into utilisateur(PSEUDO, MDP, IS_ADMIN) values('$login', '$mdp', $is_admin)");
     $stmt->execute();
     $_SESSION['login'] = $login; //On retient son login
-    redirect("PageChoix.php");
+    redirect("PageChoix.php?showTuto=true");
 }
 ?>
 <html lang="fr">
@@ -38,19 +38,9 @@ if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
                 };
             </script>
         </div>
+        <?php require_once "../Includes/scripts.php"; ?> 
 		<?php require_once "../Includes/footer.php"; ?> 
-		<?php require_once "../Includes/scripts.php"; ?> 
 	</body>
 </html>
 
-
-
-<?php
-ob_start();
-session_start();
-require_once "../Includes/head.php";
-require_once "../Includes/functions.php";
-
-
-?>
 

@@ -64,7 +64,7 @@ $themes = getDb()->query('select * from theme order by ID_THEME');
 				<br/>
 			<?php } ?>
 		</div>
+		<?php require_once "../Includes/scripts.php"; ?>
 		<?php require_once "../Includes/footer.php"; ?> 
-		<?php require_once "../Includes/scripts.php"; ?> 
 	</body>
 </html>
