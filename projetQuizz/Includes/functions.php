@@ -152,32 +152,6 @@ function AddIdent($type)
     </div>
 <?php }
 
-//Affiche le Tutoriel dans une modal
-function AddTuto()
-{?>
-    <!-- Modal -->
-    <div class="modal fade" id="Tuto" tabindex="-1" role="dialog" aria-labelledby="TutoLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="TutoLabel"> Tutoriel </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        	            <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-					<div class="embed-responsive embed-responsive-16by9">
-						<iframe src="../Images/TutoQuizzENSC.mp4" title="Tutoriel"></iframe>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-				</div>
-            </div>
-        </div>
-    </div>
-<?php }
-
 // Permet d'ajouter un média au répetoire du site
 function AddMedia()
 {
@@ -191,8 +165,8 @@ function AddMedia()
 		$message="Le fichier que vous essayez d'ajouter existe déjà";
 		$uploadOk = 0;
 	}
-	// On vérifie la taille dufichier
-	if ($_FILES["MEDIA"]["size"] > 100000000) 
+	// On vérifie la taille du fichier (max 5Mo)
+	if ($_FILES["MEDIA"]["size"] > 5000000) 
 	{
 		$message="Le fichier que vous essayez d'ajouter est trop lourd";
 		$uploadOk = 0;
