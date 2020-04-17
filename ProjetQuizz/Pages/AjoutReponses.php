@@ -114,7 +114,6 @@ $nbReponses = $_GET['nbRep'];
                     </fieldset>
                 </form>
             </div>
-            <br/><br/>
         </div>
         <?php require_once "../Includes/scripts.php"; ?> 
         <?php require_once "../Includes/footer.php"; ?> 
