@@ -33,7 +33,7 @@ else
 }
 
 
-$stmt = getDb()->query("select * from `" . $table . "` where `" . $primKey. "`='$id'"); 
+$stmt = getDb()->prepare("select * from `" . $table . "` where `" . $primKey. "`='$id'"); 
 $stmt->execute();
 $infoBDD=$stmt->fetch();
 ?>

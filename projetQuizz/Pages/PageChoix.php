@@ -23,7 +23,8 @@ if(isset($_SESSION['ID_THEME']))
 }
 
 // On recupere tous les themes
-$themes = getDb()->query('select * from theme order by ID_THEME'); 
+$themes = getDb()->prepare('select * from theme order by ID_THEME'); 
+$themes->execute();
 ?>
 
 <html>

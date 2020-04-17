@@ -6,7 +6,8 @@ require_once "../Includes/head.php";
 
 // Recuperer les infos sur l'utilisateur
 $login=$_SESSION['login'];
-$stmt = getDb()->query("select * from utilisateur where PSEUDO='$login'"); 
+$stmt = getDb()->prepare("select * from utilisateur where PSEUDO='$login'"); 
+$stmt->execute();
 $profil=$stmt->fetch();
 ?>
 
